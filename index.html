@@ -12,25 +12,18 @@
         <script type='text/javascript' src='js/DatabaseApp.js'></script>
     </head>
     <body ng-controller='DatabaseController'>
-        <h1>{{message}}</h1>
-        <accordion close-others="oneAtATime">
-            <accordion-group heading="Static Header">
-            This content is straight in the template.
-            </accordion-group>
-            <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
-            {{group.content}}
-            </accordion-group>
-            <accordion-group heading="Dynamic Body Content">
-            <p>The body of the accordion group grows to fit the contents</p>
-                <button class="btn btn-small" ng-click="addItem()">Add Item</button>
-                <div ng-repeat="item in items">{{item}}</div>
-            </accordion-group>
-            <accordion-group>
-                <accordion-heading>
-                    I can have markup, too! <i class="icon-check"></i>
-                </accordion-heading>
-                This is just some content to illustrate fancy headings.
-            </accordion-group>
-        </accordion>
+        <h1 id='pageTitle'>Watson Database Lab</h1>
+        <div id='editor'>
+            <span class='s-title'>Relation Editor</span><br/>
+            <input type="textarea">
+        </div>
+        <div id='contents'>
+            <span class='s-title'>Contents of Relation</span><br/>
+            <input type="textarea">
+        </div>
+        <div id='list'>
+            <span class='s-title'>List of Relations</span><br/>
+            <input type="textarea">
+        </div>
     </body>
 </html>

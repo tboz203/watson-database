@@ -1,5 +1,44 @@
+/*                           _      _       _
+    ___ ___  _ __ ___  _ __ | | ___| |_ ___| |_   _
+   / __/ _ \| '_ ` _ \| '_ \| |/ _ \ __/ _ \ | | | |
+  | (_| (_) | | | | | | |_) | |  __/ ||  __/ | |_| |
+   \___\___/|_| |_| |_| .__/|_|\___|\__\___|_|\__, |
+                      |_|                     |___/
+
+   _   _ _ __  _ __   ___  ___ ___  ___ ___  __ _ _ __ _   _
+  | | | | '_ \| '_ \ / _ \/ __/ _ \/ __/ __|/ _` | '__| | | |
+  | |_| | | | | | | |  __/ (_|  __/\__ \__ \ (_| | |  | |_| |
+   \__,_|_| |_|_| |_|\___|\___\___||___/___/\__,_|_|   \__, |
+                                                       |___/
+
+  but for serious, bootstrap ought to take care of most of this stuff, and make
+  it a lot prettier than we ever could. we'll look into that. */
+
+
 html, body {
     width: 100%;
     height: 100%;
-    padding 10px;
+    background-color:#222222
 }
+
+#pageTitle {
+    height:10%;
+    background-color:blue;
+    margin:0px;
+}
+
+div#editor {
+    height: 15%;
+    background-color:green;
+}
+
+div#contents {
+    height: 60%;
+    background-color:yellow;
+}
+
+div#list {
+    height: 15%;
+    background-color:red;
+}
+
