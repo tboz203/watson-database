@@ -61,16 +61,29 @@
                 </span> <!-- End Relationship View Group -->
             </div> <!-- End Relationship View -->
             <hr>
+            <!-- Table View -->
             <div>
-                <h3>{{table.name}}</h3>
-                <table class="table table-striped table-bordered">
-                    <tr ng-repeat="row in table.rows">
-                        <td ng-repeat="item in row">
-                            <span>{{item}}</span>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                <!-- Table Dropdown -->
+                <span class="dropdown">
+                    <h4 class="dropdown-toggle">{{table.name}} <span class="caret"></span></h4>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="rel in relations">
+                            <a href="#/{{rel.link}}">{{rel.name}}</a>
+                        </li>
+                    </ul>
+                </span>
+                <!-- Table -->
+                <div id="table">
+                    <table class="table table-striped table-bordered table-condensed">
+                        <tr ng-repeat="row in table.rows">
+                            <td ng-repeat="item in row">
+                                <span>{{item}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div> <!-- End Table View -->
+            {{tables}}
         </div> <!-- End Main Container -->
         <script type='text/javascript' src='lib/jquery.js'></script>
         <script type='text/javascript' src='lib/angular.js'></script>
