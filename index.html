@@ -10,20 +10,24 @@
     <body ng-controller='DatabaseController'>
         <div class="container">
             <h1>Watson Database Lab</h1>
+            <hr>
             <div>
                 <h3>Relation Editor</h3>
-                <div class="row">
-                    <input class="well well-lg col-md-10 text-center">
-                    <div class="col-md-2 btn-group-vertical btn-group-lg">
-                        <a href="#" class="btn btn-success">OK</a>
-                        <a href="#" class="btn btn-danger">Cancel</a>
-                    </div>
-                </div>
-                <div class="btn-group btn-group-lg btn-group-justified col-md-10">
-                    <a href="#" class="btn btn-default">Select</a>
-                    <a href="#" class="btn btn-default">Project</a>
-                    <a href="#" class="btn btn-default">Join</a>
-                </div>
+                <span class="input-group input-group-lg">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu" aria-labeledby="action-dropdown-menu">
+                            <li role="presentation"><a href="#" role="menuitem" tabindex="-1">Select</a></li>
+                            <li role="presentation"><a href="#" role="menuitem" tabindex="-1">Project</a></li>
+                            <li role="presentation"><a href="#" role="menuitem" tabindex="-1">Join</a></li>
+                        </ul>
+                    </span>
+                    <span class="form-control well text-center">This is some text</span>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-success">Accept</button>
+                        <button type="button" class="btn btn-danger">Cancel</button>
+                    </span>
+                </span>
             </div>
         </div>
         <script type='text/javascript' src='lib/jquery.js'></script>
