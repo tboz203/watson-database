@@ -4,32 +4,74 @@
         <title>Database Lab</title>
         <style type='text/css'>
             @import url('css/bootstrap-3.css');
-            /*@import url('css/database.css');*/
+            @import url('css/database.css');
         </style>
     </head>
     <body ng-controller='DatabaseController'>
+        <!-- Main Container - covers entire page -->
         <div class="container">
             <h1>Watson Database Lab</h1>
             <hr>
+            <!-- Relationship View -->
             <div>
-                <h3>Relation Editor</h3>
+                <!-- Relationship View Group -->
                 <span class="input-group input-group-lg">
+                    <!-- 'Action' button -->
                     <span class="input-group-btn">
-                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
-                        <ul class="dropdown-menu" role="menu" aria-labeledby="action-dropdown-menu">
-                            <li role="presentation"><a href="#" role="menuitem" tabindex="-1">Select</a></li>
-                            <li role="presentation"><a href="#" role="menuitem" tabindex="-1">Project</a></li>
-                            <li role="presentation"><a href="#" role="menuitem" tabindex="-1">Join</a></li>
+                        <button class="btn btn-default dropdown-toggle">Action <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#/Select" tabindex="-1">Select</a></li>
+                            <li><a href="#/Project" tabindex="-1">Project</a></li>
+                            <li><a href="#/Join" tabindex="-1">Join</a></li>
                         </ul>
                     </span>
-                    <span class="form-control well text-center">This is some text</span>
+                    <!-- Relationship Text -->
+                    <div class="form-control well text-center">
+                        FROM <span class="dropdown"><a class="dropdown-toggle">relation</a>
+                            <ul class="dropdown-menu text-left">
+                                <li ng-repeat="rel in relations">
+                                    <a href="#/{{rel.link}}">{{rel.name}}</a>
+                                </li>
+                            </ul></span>
+                        SELECT WHERE <span class="dropdown"><a class="dropdown-toggle">value</a>
+                            <ul class="dropdown-menu text-left">
+                                <li ng-repeat="val in getRelColumns()">
+                                    <a href="#/{{val.link}}">{{val.name}}</a>
+                                </li>
+                            </ul></span>
+                        <span class="dropdown"><a class="dropdown-toggle">comparison</a>
+                            <ul class="dropdown-menu text-left">
+                                <li ng-repeat="cond in getRelConditions()">
+                                    <a href="#/{{cond.link}}">{{cond.name}}</a>
+                                </li>
+                            </ul></span>
+                        <span class="dropdown"><a class="dropdown-toggle">value</a>
+                            <ul class="dropdown-menu text-left">
+                                <li ng-repeat="val in getComparisonValues()">
+                                    <a href="#/{{val.link}}">{{val.name}}</a>
+                                </li>
+                            </ul></span>
+                        ;
+                    </div>
+                    <!-- Accept/Cancel buttons -->
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-success">Accept</button>
                         <button type="button" class="btn btn-danger">Cancel</button>
                     </span>
-                </span>
+                </span> <!-- End Relationship View Group -->
+            </div> <!-- End Relationship View -->
+            <hr>
+            <div>
+                <h3>{{table.name}}</h3>
+                <table border="1">
+                    <tr ng-repeat="row in table.rows">
+                        <td ng-repeat="item in row">
+                            <span>{{item}}</span>
+                        </td>
+                    </tr>
+                </table>
             </div>
-        </div>
+        </div> <!-- End Main Container -->
         <script type='text/javascript' src='lib/jquery.js'></script>
         <script type='text/javascript' src='lib/angular.js'></script>
         <script type='text/javascript' src='lib/bootstrap-3.js'></script>
