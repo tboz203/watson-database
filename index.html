@@ -3,27 +3,33 @@
     <head>
         <title>Database Lab</title>
         <style type='text/css'>
-            @import url('css/bootstrap.css');
-            @import url('css/database.css');
+            @import url('css/bootstrap-3.css');
+            /*@import url('css/database.css');*/
         </style>
-        <script type='text/javascript' src='lib/jquery.js'></script>
-        <script type='text/javascript' src='lib/angular.js'></script>
-        <script type='text/javascript' src='lib/ui-bootstrap.js'></script>
-        <script type='text/javascript' src='js/DatabaseApp.js'></script>
     </head>
     <body ng-controller='DatabaseController'>
-        <h1 id='pageTitle'>Watson Database Lab</h1>
-        <div id='editor'>
-            <span class='s-title'>Relation Editor</span><br/>
-            <input type="textarea">
+        <div class="container">
+            <h1>Watson Database Lab</h1>
+            <div>
+                <h3>Relation Editor</h3>
+                <div class="row">
+                    <input class="well well-lg col-md-10 text-center">
+                    <div class="col-md-2 btn-group-vertical btn-group-lg">
+                        <a href="#" class="btn btn-success">OK</a>
+                        <a href="#" class="btn btn-danger">Cancel</a>
+                    </div>
+                </div>
+                <div class="btn-group btn-group-lg btn-group-justified col-md-10">
+                    <a href="#" class="btn btn-default">Select</a>
+                    <a href="#" class="btn btn-default">Project</a>
+                    <a href="#" class="btn btn-default">Join</a>
+                </div>
+            </div>
         </div>
-        <div id='contents'>
-            <span class='s-title'>Contents of Relation</span><br/>
-            <input type="textarea">
-        </div>
-        <div id='list'>
-            <span class='s-title'>List of Relations</span><br/>
-            <input type="textarea">
-        </div>
+        <script type='text/javascript' src='lib/jquery.js'></script>
+        <script type='text/javascript' src='lib/angular.js'></script>
+        <script type='text/javascript' src='lib/bootstrap-3.js'></script>
+        <script type='text/javascript' src='lib/ui-bootstrap.js'></script>
+        <script type='text/javascript' src='js/DatabaseApp.js'></script>
     </body>
 </html>
