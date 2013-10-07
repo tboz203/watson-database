@@ -18,11 +18,11 @@
                 <span class="input-group input-group-lg">
                     <!-- 'Action' button -->
                     <span class="input-group-btn">
-                        <button class="btn btn-default dropdown-toggle">Action <span class="caret"></span></button>
+                        <button class="btn btn-default dropdown-toggle">{{current.act}} <span class="caret"></span></button>
                         <ul class="dropdown-menu">
-                            <li><a href="#/Select" tabindex="-1">Select</a></li>
-                            <li><a href="#/Project" tabindex="-1">Project</a></li>
-                            <li><a href="#/Join" tabindex="-1">Join</a></li>
+                            <li><a href="#/Select" tabindex="-1" ng-click="current.act = "Select"">Select</a></li>
+                            <li><a href="#/Project"  tabindex="-1">Project</a></li>
+                            <li><a href="#/Join"  tabindex="-1">Join</a></li>
                         </ul>
                     </span>
                     <!-- Relationship View -->
@@ -31,7 +31,7 @@
                         FROM <span class="dropdown"><a class="dropdown-toggle">{{current.relat}}</a>
                             <ul class="dropdown-menu text-left">
                                 <li ng-repeat="rel in relations">
-                                    <a href="#/{{rel.link}}">{{rel.name}}</a>
+                                    <a href="#/{{rel.link}}" ng-click="current.relat = rel.name">{{rel.name}}</a>
                                 </li>
                             </ul></span>
                             SELECT WHERE <span class="dropdown"><a class="dropdown-toggle">{{current.value1}}</a>
@@ -43,13 +43,13 @@
                             <span class="dropdown"><a class="dropdown-toggle">{{current.comp}}</a>
                             <ul class="dropdown-menu text-left">
                                 <li ng-repeat="cond in getRelConditions()">
-                                    <a href="#/{{cond.link}}">{{cond.name}}</a>
+                                    <a href="#/{{cond.link}}" ng-click="current.comp = cond.name">{{cond.name}}</a>
                                 </li>
                             </ul></span>
                             <span class="dropdown"><a class="dropdown-toggle">{{current.value2}}</a>
                             <ul class="dropdown-menu text-left">
                                 <li ng-repeat="val in getComparisonValues()">
-                                    <a href="#/{{val.link}}">{{val.name}}</a>
+                                    <a href="#/{{val.link}}" ng-click="current.value2 = val.name">{{val.name}}</a>
                                 </li>
                             </ul></span>
                             ; <!-- End Select Text -->
