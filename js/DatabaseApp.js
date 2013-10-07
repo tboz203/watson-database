@@ -3,6 +3,13 @@ angular.module('DatabaseApp', ['ui.bootstrap']);
 var DatabaseController = function($scope){
     $scope.message = "This is a test";
 
+    $scope.current = {
+        relat: "relation",
+        value1: "value",
+        comp: "comparison",
+        value2: "value"
+    };
+
     $scope.relations = [
         {link: "rel1", name: "Relation 1"},
         {link: "rel2", name: "Relation 2"},

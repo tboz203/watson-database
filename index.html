@@ -28,25 +28,25 @@
                     <!-- Relationship View -->
                     <div class="form-control well text-center">
                         <!-- Select Text -->
-                        FROM <span class="dropdown"><a class="dropdown-toggle">relation</a>
+                        FROM <span class="dropdown"><a class="dropdown-toggle">{{current.relat}}</a>
                             <ul class="dropdown-menu text-left">
                                 <li ng-repeat="rel in relations">
                                     <a href="#/{{rel.link}}">{{rel.name}}</a>
                                 </li>
                             </ul></span>
-                        SELECT WHERE <span class="dropdown"><a class="dropdown-toggle">value</a>
+                            SELECT WHERE <span class="dropdown"><a class="dropdown-toggle">{{current.value1}}</a>
                             <ul class="dropdown-menu text-left">
                                 <li ng-repeat="val in getRelColumns()">
-                                    <a href="#/{{val.link}}">{{val.name}}</a>
+                                    <a href="#/{{val.link}}" ng-click="current.value1 = val.name">{{val.name}}</a>
                                 </li>
                             </ul></span>
-                        <span class="dropdown"><a class="dropdown-toggle">comparison</a>
+                            <span class="dropdown"><a class="dropdown-toggle">{{current.comp}}</a>
                             <ul class="dropdown-menu text-left">
                                 <li ng-repeat="cond in getRelConditions()">
                                     <a href="#/{{cond.link}}">{{cond.name}}</a>
                                 </li>
                             </ul></span>
-                        <span class="dropdown"><a class="dropdown-toggle">value</a>
+                            <span class="dropdown"><a class="dropdown-toggle">{{current.value2}}</a>
                             <ul class="dropdown-menu text-left">
                                 <li ng-repeat="val in getComparisonValues()">
                                     <a href="#/{{val.link}}">{{val.name}}</a>
