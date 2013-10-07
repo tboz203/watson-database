@@ -43,7 +43,7 @@ var DatabaseController = function($scope){
                 ['a', 'b', 'c', 'd', 'e'],
                 ['f', 'g', 'h', 'i', 'j']
             ]
-        } /*, Students: {
+        } , Students: {
             name: "Students",
             head: ["sname", "age", "major", "id", "sex", "address", "city", "state"],
             rows: [
@@ -52,9 +52,9 @@ var DatabaseController = function($scope){
                 ["Bronson P.",      26, "Math", 55555503, "M", "1 Web Master",      "Ruston",       "LA"],
                 ["Brooks D.",       18, "CS",   55555504, "F", "900 Baird Street",  "Dallas",       "TX"],
                 ["Garret D.",       20, "PSY",  55555505, "M", "BGB Consulting",    "Dallas",       "TX"],
-                ["Howard M."        21, "CS",   55555506, "M", "5 Scarborough",     "Dallas",       "TX"],
-                ["Huey B."          20, "CS",   55555507, "F", "1 Historic Place",  "Jackson",      "MS"],
-                ["Kleinpeter J."    24, "CS",   55555508, "M", "69 Watson Lane",    "Ruston",       "LA"],
+                ["Howard M.",       21, "CS",   55555506, "M", "5 Scarborough",     "Dallas",       "TX"],
+                ["Huey B.",         20, "CS",   55555507, "F", "1 Historic Place",  "Jackson",      "MS"],
+                ["Kleinpeter J.",   24, "CS",   55555508, "M", "69 Watson Lane",    "Ruston",       "LA"],
                 ["Kyzar D.",        18, "CS",   55555509, "M", "49 Animae Way",     "Hammond",      "LA"],
                 ["Moore D.",        19, "Math", 55555510, "M", "No. 7 Seagram",     "Ruston",       "LA"],
                 ["Moore L.",        20, "Math", 55555511, "F", "2 Pot Place",       "New York",     "NY"],
@@ -68,8 +68,8 @@ var DatabaseController = function($scope){
                 ["Walker J.",       23, "CS",   55555519, "M", "42 Ocean Drive",    "Venice",       "CA"],
                 ["Walker R.",       21, "CS",   55555520, "M", "9 Iron Drive",      "Monroe",       "LA"]
             ]
-        }*/
+        }
     }
 
-    $scope.table = $scope.tables.Test;
+    $scope.table = $scope.tables.Students;
 }
