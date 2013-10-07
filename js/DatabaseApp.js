@@ -43,7 +43,7 @@ var DatabaseController = function($scope){
                 ['a', 'b', 'c', 'd', 'e'],
                 ['f', 'g', 'h', 'i', 'j']
             ]
-        } , Students: {
+        }, Students: {
             name: "Students",
             head: ["sname", "age", "major", "id", "sex", "address", "city", "state"],
             rows: [
