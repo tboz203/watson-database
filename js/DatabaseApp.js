@@ -4,6 +4,7 @@ var DatabaseController = function($scope){
     $scope.message = "This is a test";
 
     $scope.current = {
+    	act: "Action",
         relat: "relation",
         value1: "value",
         comp: "comparison",
@@ -26,9 +27,11 @@ var DatabaseController = function($scope){
 
     $scope.getRelConditions = function($scope){
         return [
-            {link: "lt", name: "less than"},
-            {link: "gt", name: "greater than"},
-            {link: "eq", name: "equal to"}
+            {link: "lt", name: "<"},
+            {link: "le", name: "<="},
+            {link: "gt", name: ">"},
+            {link: "ge", name: ">="},
+            {link: "eq", name: "="}
         ];
     }
 
