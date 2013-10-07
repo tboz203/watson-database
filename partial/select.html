@@ -1,0 +1,27 @@
+<span ng-app="DatabaseApp" ng-controller="DatabaseController">
+FROM <span class="dropdown"><a class="dropdown-toggle">{{current.relat}}</a>
+<ul class="dropdown-menu text-left">
+    <li ng-repeat="rel in relations">
+        <a href="#" ng-click="current.relat = rel.name">{{rel.name}}</a>
+    </li>
+</ul></span>
+SELECT WHERE <span class="dropdown"><a class="dropdown-toggle">{{current.value1}}</a>
+<ul class="dropdown-menu text-left">
+    <li ng-repeat="val in getRelColumns()">
+        <a href="#" ng-click="current.value1 = val.name">{{val.name}}</a>
+    </li>
+</ul></span>
+<span class="dropdown"><a class="dropdown-toggle">{{current.comp}}</a>
+<ul class="dropdown-menu text-left">
+    <li ng-repeat="cond in getRelConditions()">
+        <a href="#" ng-click="current.comp = cond.name">{{cond.name}}</a>
+    </li>
+</ul></span>
+<span class="dropdown"><a class="dropdown-toggle">{{current.value2}}</a>
+<ul class="dropdown-menu text-left">
+    <li ng-repeat="val in getComparisonValues()">
+        <a href="#" ng-click="current.value2 = val.name">{{val.name}}</a>
+    </li>
+</ul></span>
+;
+</span>

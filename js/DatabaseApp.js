@@ -3,8 +3,12 @@ angular.module('DatabaseApp', ['ui.bootstrap']);
 var DatabaseController = function($scope){
     $scope.message = "This is a test";
 
+    $scope.action = {
+        link: 'select.html'
+    }
+
     $scope.current = {
-    	act: "Action",
+        act: "Action",
         relat: "relation",
         value1: "value",
         comp: "comparison",
