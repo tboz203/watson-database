@@ -17,7 +17,7 @@ html, body {
   height: 100%;
 }
 
-#table {
+#relation {
   overflow-y: auto;
   overflow-x: auto;
 }

@@ -7,19 +7,32 @@ var DatabaseController = function($scope){
         link: 'select.html'
     }
 
+    $scope.actions = {
+        Select: {
+            name: 'Select',
+            page: 'partial/select.html'
+        },
+        Project: {
+            name: 'Project',
+            page: 'partial/project.html'
+        },
+        Join: {
+            name: 'Join',
+            page: 'partial/join.html'
+        },
+        None: {
+            name: 'Action',
+            page: 'partial/none.html'
+        }
+    }
+
     $scope.current = {
-        action: "Action",
+        action: $scope.actions.None,
         relation: "relation",
         value1: "value",
         comparison: "comparison",
         value2: "value"
     };
-
-    $scope.relations = [
-        "Relation 1",
-        "Relation 2",
-        "Relation 3"
-    ]
 
     $scope.getRelColumns = function($scope){
         return [
@@ -47,7 +60,7 @@ var DatabaseController = function($scope){
         ];
     }
 
-    $scope.tables = {
+    $scope.relations = {
         Test: {
             name: "Test",
             head: ["first", "second", "name", "id", "foobar"],
@@ -85,5 +98,5 @@ var DatabaseController = function($scope){
         }
     }
 
-    $scope.table = $scope.tables.Students;
+    $scope.relation = $scope.relations.Students;
 }

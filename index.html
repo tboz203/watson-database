@@ -10,51 +10,51 @@
 <div class='container'>
     <h1>Watson Database Lab</h1>
     <hr>
-    <!-- Relationship View -->
+    <!-- Relation Editor View -->
     <div>
-        <!-- Relationship View Group -->
+        <!-- Relation Editor Group -->
         <span class='input-group input-group-lg'>
             <!-- 'Action' button -->
             <span class='input-group-btn'>
-                <button class='btn btn-default dropdown-toggle'>{{current.action}} <span class='caret'></span></button>
+                <button class='btn btn-default dropdown-toggle'>{{current.action.name}} <span class='caret'></span></button>
                 <ul class='dropdown-menu'>
-                    <li><a href='#' tabindex='-1' ng-click='current.action = "Select"'>Select</a></li>
-                    <li><a href='#'  tabindex='-1' ng-click='current.action = "Project"'>Project</a></li>
-                    <li><a href='#'  tabindex='-1' ng-click='current.action = "Join"'>Join</a></li>
+                    <li><a href='#' tabindex='-1' ng-click='current.action = actions.Select'>Select</a></li>
+                    <li><a href='#'  tabindex='-1' ng-click='current.action = actions.Project'>Project</a></li>
+                    <li><a href='#'  tabindex='-1' ng-click='current.action = actions.Join'>Join</a></li>
                 </ul>
             </span>
             <!-- Action View -->
-            <div ng-include=''partial/select.html'' class='form-control well text-center'></div>
+            <div ng-include='current.action.page' class='form-control well text-center'></div>
             <!-- Accept/Cancel buttons -->
             <span class='input-group-btn'>
                 <button type='button' class='btn btn-success'>Accept</button>
                 <button type='button' class='btn btn-danger'>Cancel</button>
             </span>
-        </span> <!-- End Relationship View Group -->
-    </div> <!-- End Relationship View -->
+        </span> <!-- End Relationship Editor Group -->
+    </div> <!-- End Relationship Editor View -->
     <hr>
-    <!-- Table List View -->
+    <!-- Relation List View -->
     <div class='list-group'>
         <!-- '$parent' required because the ng-repeat creates a new inner scope -->
-        <li class='list-group-item' ng-repeat='t in tables' ng-model='$parent.table' btn-radio='t'>{{t.name}}</li>
+        <li class='list-group-item' ng-repeat='rel in relations' ng-model='$parent.relation' btn-radio='rel'>{{rel.name}}</li>
     </div>
-    <!-- Table View -->
-    <div id='table'>
+    <!-- Relation View -->
+    <div id='relation'>
         <table class='table table-striped table-bordered table-condensed'>
             <thead>
-                <th ng-repeat='item in table.head'>
+                <th ng-repeat='item in relation.head'>
                     <span>{{item}}</span>
                 </th>
             </thead>
             <tbody>
-            <tr ng-repeat='row in table.rows'>
+            <tr ng-repeat='row in relation.rows'>
                 <td ng-repeat='item in row'>
                     <span>{{item}}</span>
                 </td>
             </tr>
             </tbody>
         </table>
-    </div> <!-- End Table View -->
+    </div> <!-- End Relation View -->
 </div> <!-- End Main Container -->
 <script type='text/javascript' src='lib/jquery.js'></script>
 <script type='text/javascript' src='lib/angular.js'></script>
