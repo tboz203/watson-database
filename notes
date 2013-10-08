@@ -1,13 +1,11 @@
 ## Notes
 
-- Currently, in index.html, the Relationship View is hard-coded to show the
-  Select relationship. This needs to be changed to reflect the currently
-  selected action.
 - The tables need to finish being copied from old watson to DatabaseApp.js.
+- Need to add partials for project and join
+- Add hover effect to table list?
 - The dropdown links in (first the select relation and then) all relations
    need to fetch appropriate values to pick from.
-- The dropdown links in (first the select relation and then) all relations
-  need to change when a new value is selected.
+- The accept and cancel buttons still need to be wired up
 
 ---
 

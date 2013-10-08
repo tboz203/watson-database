@@ -8,42 +8,42 @@ var DatabaseController = function($scope){
     }
 
     $scope.current = {
-        act: "Action",
-        relat: "relation",
+        action: "Action",
+        relation: "relation",
         value1: "value",
-        comp: "comparison",
+        comparison: "comparison",
         value2: "value"
     };
 
     $scope.relations = [
-        {link: "rel1", name: "Relation 1"},
-        {link: "rel2", name: "Relation 2"},
-        {link: "rel3", name: "Relation 3"}
+        "Relation 1",
+        "Relation 2",
+        "Relation 3"
     ]
 
     $scope.getRelColumns = function($scope){
         return [
-            {link: "val1", name: "Value 1"},
-            {link: "val2", name: "Value 2"},
-            {link: "val3", name: "Value 3"}
+            "Value 1",
+            "Value 2",
+            "Value 3"
         ];
     }
 
     $scope.getRelConditions = function($scope){
         return [
-            {link: "lt", name: "<"},
-            {link: "le", name: "<="},
-            {link: "gt", name: ">"},
-            {link: "ge", name: ">="},
-            {link: "eq", name: "="}
+            "<",
+            "<=",
+            ">",
+            ">=",
+            "="
         ];
     }
 
     $scope.getComparisonValues = function($scope){
         return [
-            {link: "val1", name: "Value 1"},
-            {link: "val2", name: "Value 2"},
-            {link: "val3", name: "Value 3"}
+            "Value 1",
+            "Value 2",
+            "Value 3"
         ];
     }
 
