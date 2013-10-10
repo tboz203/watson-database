@@ -16,11 +16,11 @@
         <span class='input-group input-group-lg'>
             <!-- 'Action' button -->
             <span class='input-group-btn'>
-                <button class='btn btn-default dropdown-toggle'>{{current.action.name}} <span class='caret'></span></button>
+                <button class='btn btn-default dropdown-toggle' ng-bind="current.action.name"><span class='caret'></span></button>
                 <ul class='dropdown-menu'>
-                    <li><a href='#' tabindex='-1' ng-click='current.action = actions.Select'>Select</a></li>
-                    <li><a href='#'  tabindex='-1' ng-click='current.action = actions.Project'>Project</a></li>
-                    <li><a href='#'  tabindex='-1' ng-click='current.action = actions.Join'>Join</a></li>
+                    <li><a tabindex='-1' ng-click='current.action = actions.Select'>Select</a></li>
+                    <li><a tabindex='-1' ng-click='current.action = actions.Project'>Project</a></li>
+                    <li><a tabindex='-1' ng-click='current.action = actions.Join'>Join</a></li>
                 </ul>
             </span>
             <!-- Action View -->
@@ -34,22 +34,22 @@
     </div> <!-- End Relationship Editor View -->
     <hr>
     <!-- Relation List View -->
-    <div class='list-group'>
+    <div class='list-group list-group-sm'>
         <!-- '$parent' required because the ng-repeat creates a new inner scope -->
-        <li class='list-group-item' ng-repeat='rel in relations' ng-model='$parent.relation' btn-radio='rel'>{{rel.name}}</li>
+        <li class='btn btn-default list-group-item list-group-btn' ng-repeat='rel in relations' ng-model='$parent.relation' btn-radio='rel' ng-bind="rel.name"></li>
     </div>
     <!-- Relation View -->
-    <div id='relation'>
-        <table class='table table-striped table-bordered table-condensed'>
+    <div>
+        <table class='table table-striped table-condensed'>
             <thead>
                 <th ng-repeat='item in relation.head'>
-                    <span>{{item}}</span>
+                    <span ng-bind="item"></span>
                 </th>
             </thead>
             <tbody>
             <tr ng-repeat='row in relation.rows'>
                 <td ng-repeat='item in row'>
-                    <span>{{item}}</span>
+                    <span ng-bind="item"></span>
                 </td>
             </tr>
             </tbody>

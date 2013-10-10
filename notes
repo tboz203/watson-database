@@ -1,13 +1,16 @@
 ## Notes
 
-- The tables need to finish being copied from old watson to DatabaseApp.js.
-- Need to add partials for project and join
 - Add hover effect to table list?
 - The dropdown links in (first the select relation and then) all relations
    need to fetch appropriate values to pick from.
 - The accept and cancel buttons still need to be wired up
 
----
+- - -
+
+- Something needs to be done with 'current'. having all the action values in
+  the same place will lead to problems
+
+- - -
 
 - "play with this" button
 - reset button

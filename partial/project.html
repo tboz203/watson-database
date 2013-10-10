@@ -1,3 +1,17 @@
-FROM <span class="dropdown"><a class="dropdown-toggle">{{current.relation}}</a>
-    <ul class="dropdown-menu text-left">
-        <li ng-repeat="rel in relations">
+FROM <span class='dropdown'>
+    <a class='dropdown-toggle' ng-bind='current.relation.name'></a>
+    <ul class='dropdown-menu text-left'>
+        <li ng-repeat='rel in relations'>
+        <a ng-click='current.relation = rel' ng-bind='rel.name'></a>
+        </li>
+    </ul>
+</span>
+PROJECT <span class='dropdown'>
+    <a class='dropdown-toggle' ng-bind='current.attribute'></a>
+    <ul class='dropdown-menu text-left'>
+        <li ng-repeat='attr in current.relation.head'>
+        <a ng-click='current.attribute = attr' ng-bind='attr'></a>
+        </li>
+    </ul>
+</span>
+;

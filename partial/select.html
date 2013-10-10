@@ -1,25 +1,33 @@
-FROM <span class="dropdown"><a class="dropdown-toggle">{{current.relation}}</a>
-<ul class="dropdown-menu text-left">
-    <li ng-repeat="rel in relations">
-        <a href="#" ng-click="current.relation = t">{{t.name}}</a>
-    </li>
-</ul></span>
-SELECT WHERE <span class="dropdown"><a class="dropdown-toggle">{{current.value1}}</a>
-<ul class="dropdown-menu text-left">
-    <li ng-repeat="val in getRelColumns()">
-        <a href="#" ng-click="current.value1 = val">{{val}}</a>
-    </li>
-</ul></span>
-<span class="dropdown"><a class="dropdown-toggle">{{current.comparison}}</a>
-<ul class="dropdown-menu text-left">
-    <li ng-repeat="cond in getRelConditions()">
-        <a href="#" ng-click="current.comparison = cond">{{cond}}</a>
-    </li>
-</ul></span>
-<span class="dropdown"><a class="dropdown-toggle">{{current.value2}}</a>
-<ul class="dropdown-menu text-left">
-    <li ng-repeat="val in getComparisonValues()">
-        <a href="#" ng-click="current.value2 = val">{{val}}</a>
-    </li>
-</ul></span>
+FROM <span class='dropdown'>
+    <a class='dropdown-toggle' ng-bind='current.relation.name'></a>
+    <ul class='dropdown-menu text-left'>
+        <li ng-repeat='rel in relations'>
+        <a ng-click='current.relation = rel' ng-bind='rel.name'></a>
+        </li>
+    </ul>
+</span>
+SELECT WHERE <span class='dropdown'>
+    <a class='dropdown-toggle' ng-bind='current.attribute'></a>
+    <ul class='dropdown-menu text-left'>
+        <li ng-repeat='attr in current.relation.head'>
+        <a ng-click='current.attribute = attr' ng-bind='attr'></a>
+        </li>
+    </ul>
+</span>
+<span class='dropdown'>
+    <a class='dropdown-toggle' ng-bind='current.comparison'></a>
+    <ul class='dropdown-menu text-left'>
+        <li ng-repeat='cond in getRelConditions()'>
+        <a ng-click='current.comparison = cond' ng-bind='cond'></a>
+        </li>
+    </ul>
+</span>
+<span class='dropdown'>
+    <a class='dropdown-toggle' ng-bind='current.value'></a>
+    <ul class='dropdown-menu text-left'>
+        <li ng-repeat='val in getComparisonValues()'>
+        <a ng-click='current.value = val' ng-bind='val'></a>
+        </li>
+    </ul>
+</span>
 ;
