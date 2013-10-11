@@ -1,24 +1,24 @@
 JOIN <span class='dropdown'>
-    <a class='dropdown-toggle' ng-bind='current.relation1.name'></a>
+    <a class='dropdown-toggle' ng-bind='action.relation1.name'></a>
     <ul class='dropdown-menu text-left'>
         <li ng-repeat='rel in relations'>
-        <a ng-click='current.relation1 = rel' ng-bind='rel.name'></a>
+        <a ng-click='action.relation1 = rel' ng-bind='rel.name'></a>
         </li>
     </ul>
 </span>
 AND <span class='dropdown'>
-    <a class='dropdown-toggle' ng-bind='current.relation2.name'></a>
+    <a class='dropdown-toggle' ng-bind='action.relation2.name'></a>
     <ul class='dropdown-menu text-left'>
         <li ng-repeat='rel in relations'>
-        <a ng-click='current.relation2 = rel' ng-bind='rel.name'></a>
+        <a ng-click='action.relation2 = rel' ng-bind='rel.name'></a>
         </li>
     </ul>
 </span>
 OVER <span class='dropdown'>
-    <a class='dropdown-toggle' ng-bind='current.attribute'></a>
+    <a class='dropdown-toggle' ng-bind='action.attribute'></a>
     <ul class='dropdown-menu text-left'>
-        <li ng-repeat='attr in getShared(current.relation1, current.relation2)'>
-        <a ng-click='current.attribute = attr' ng-bind='attr'></a>
+        <li ng-repeat='attr in getShared(action.relation1, action.relation2)'>
+        <a ng-click='action.attribute = attr' ng-bind='attr'></a>
         </li>
     </ul>
 </span>

@@ -1,30 +1,39 @@
 ;(function(){
     var app = angular.module('DatabaseApp', ['ui.bootstrap'])
+
     app.controller('DatabaseController', function($scope){
+
         $scope.actions = {
-            Select: {
-                name: 'Select',
-                page: 'partial/select.html'
+            select: function(){
+                return {
+                    name: 'Select',
+                    page: 'partial/select.html',
+                    relation: {name: 'relation'},
+                    attribute: 'attribute',
+                    comparison: 'comparison',
+                    value: 'value'
+                };
             },
-            Project: {
-                name: 'Project',
-                page: 'partial/project.html'
+            project: function(){
+                return {
+                    name: 'Project',
+                    page: 'partial/select.html',
+                    relation: {name: 'relation'},
+                    attributes: []
+                };
             },
-            Join: {
-                name: 'Join',
-                page: 'partial/join.html'
-            },
+            join: function(){
+                return {
+                    name: 'Join',
+                    page: 'partial/join.html',
+                    relation1: {name: 'relation'},
+                    relation2: {name: 'relation'},
+                    attribute: 'attribute'
+                };
+            }
         };
 
-        $scope.current = {
-            action: {name: 'Action'},
-            relation: {name: 'relation'},
-            relation1: {name: 'relation'},
-            relation2: {name: 'relation'},
-            attribute: 'attribute',
-            comparison: 'comparison',
-            value: 'value'
-        };
+        $scope.action = {name: 'Action'};
 
         $scope.getRelColumns = function(){
             return [

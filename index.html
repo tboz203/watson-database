@@ -16,15 +16,15 @@
         <span class='input-group input-group-lg'>
             <!-- 'Action' button -->
             <span class='input-group-btn'>
-                <button class='btn btn-default dropdown-toggle' ng-bind="current.action.name"><span class='caret'></span></button>
+                <button class='btn btn-default dropdown-toggle' ng-bind="action.name"><span class='caret'></span></button>
                 <ul class='dropdown-menu'>
-                    <li><a tabindex='-1' ng-click='current.action = actions.Select'>Select</a></li>
-                    <li><a tabindex='-1' ng-click='current.action = actions.Project'>Project</a></li>
-                    <li><a tabindex='-1' ng-click='current.action = actions.Join'>Join</a></li>
+                    <li><a tabindex='-1' ng-click='action = actions.select()'>Select</a></li>
+                    <li><a tabindex='-1' ng-click='action = actions.project()'>Project</a></li>
+                    <li><a tabindex='-1' ng-click='action = actions.join()'>Join</a></li>
                 </ul>
             </span>
             <!-- Action View -->
-            <div ng-include='current.action.page' class='form-control well text-center'></div>
+            <div ng-include='action.page' class='form-control well text-center'></div>
             <!-- Accept/Cancel buttons -->
             <span class='input-group-btn'>
                 <button type='button' class='btn btn-success'>Accept</button>
