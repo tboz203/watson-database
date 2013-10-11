@@ -2,15 +2,20 @@ FROM <span class='dropdown'>
     <a class='dropdown-toggle' ng-bind='action.relation.name'></a>
     <ul class='dropdown-menu text-left'>
         <li ng-repeat='rel in relations'>
-        <a ng-click='action.relation = rel' ng-bind='rel.name'></a>
+        <a ng-click='action.setRelation(rel)' ng-bind='rel.name'></a>
         </li>
     </ul>
 </span>
-PROJECT <span class='dropdown'>
-    <a class='dropdown-toggle' ng-bind='action.attribute'></a>
+PROJECT
+<span class='dropdown' ng-repeat='attr in action.attributes'>
+    <a class='dropdown-toggle' ng-bind='attr + ", "'></a>
+    <button class='dropdown-menu btn btn-danger' ng-click='action.remove(attr)'>Remove</button>
+</span>
+<span class='dropdown'>
+    <a class='dropdown-toggle'>attribute</a>
     <ul class='dropdown-menu text-left'>
-        <li ng-repeat='attr in action.relation.head'>
-        <a ng-click='action.attribute = attr' ng-bind='attr'></a>
+        <li ng-repeat='attr in action.available'>
+        <a ng-click='action.add(attr)' ng-bind='attr'></a>
         </li>
     </ul>
 </span>

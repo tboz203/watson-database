@@ -2,7 +2,7 @@
 <html ng-app='DatabaseApp'>
 <head>
 <title>Database Lab</title>
-<link rel='stylesheet' href='css/bootstrap-3.css'>
+<link rel='stylesheet' href='lib/bootstrap-3.css'>
 <link rel='stylesheet' href='css/database.css'>
 </head>
 <body ng-controller='DatabaseController'>
@@ -18,9 +18,9 @@
             <span class='input-group-btn'>
                 <button class='btn btn-default dropdown-toggle' ng-bind="action.name"><span class='caret'></span></button>
                 <ul class='dropdown-menu'>
-                    <li><a tabindex='-1' ng-click='action = actions.select()'>Select</a></li>
-                    <li><a tabindex='-1' ng-click='action = actions.project()'>Project</a></li>
-                    <li><a tabindex='-1' ng-click='action = actions.join()'>Join</a></li>
+                    <li><a tabindex='-1' ng-click='setSelect()'>Select</a></li>
+                    <li><a tabindex='-1' ng-click='setProject()'>Project</a></li>
+                    <li><a tabindex='-1' ng-click='setJoin()'>Join</a></li>
                 </ul>
             </span>
             <!-- Action View -->

@@ -3,45 +3,70 @@
 
     app.controller('DatabaseController', function($scope){
 
-        $scope.actions = {
-            select: function(){
-                return {
-                    name: 'Select',
-                    page: 'partial/select.html',
-                    relation: {name: 'relation'},
-                    attribute: 'attribute',
-                    comparison: 'comparison',
-                    value: 'value'
-                };
-            },
-            project: function(){
-                return {
-                    name: 'Project',
-                    page: 'partial/select.html',
-                    relation: {name: 'relation'},
-                    attributes: []
-                };
-            },
-            join: function(){
-                return {
-                    name: 'Join',
-                    page: 'partial/join.html',
-                    relation1: {name: 'relation'},
-                    relation2: {name: 'relation'},
-                    attribute: 'attribute'
-                };
+        var Select = function(){
+            this.name = 'Select';
+            this.page = 'partial/select.html';
+            this.relation = {name: 'relation'};
+            this.attribute = 'attribute';
+            this.comparison = 'comparison';
+            this.value = 'value';
+        }
+
+        var Project = function(){
+            this.name = 'Project';
+            this.page = 'partial/project.html';
+            this.relation = {name: 'relation'};
+            this.attributes = [];
+            this.available = [];
+
+            this.setRelation = function(rel){
+                this.relation = rel;
+                this.available = rel.head.slice();          // makes a copy
             }
-        };
+
+            this.add = function(attr){
+                this.attributes.push(attr);
+                var index = this.available.indexOf(attr);
+                if (index != -1){
+                    this.available.splice(index, 1);
+                } else {
+                    $scope.error();
+                }
+            }
+
+            this.remove = function(attr){
+                var index = this.attributes.indexOf(attr);
+                if (index != -1){
+                    this.attributes.splice(index, 1);
+                } else {
+                    $scope.error();
+                }
+                this.available.push(attr);
+            }
+
+        }
+
+        var Join = function(){
+            this.name = 'Join';
+            this.page = 'partial/join.html';
+            this.relation1 = {name: 'relation'};
+            this.relation2 = {name: 'relation'};
+            this.attribute = 'attribute';
+        }
+
+        $scope.setSelect = function(){
+            $scope.action = new Select();
+        }
+
+        $scope.setProject = function(){
+            $scope.action = new Project();
+        }
+
+        $scope.setJoin = function(){
+            $scope.action = new Join();
+        }
 
         $scope.action = {name: 'Action'};
-
-        $scope.getRelColumns = function(){
-            return [
-                'Value 1',
-                'Value 2',
-                'Value 3'
-            ];
-        };
 
         $scope.getRelConditions = function(){
             return [

@@ -1,14 +1,8 @@
 ## Notes
 
-- Add hover effect to table list?
 - The dropdown links in (first the select relation and then) all relations
    need to fetch appropriate values to pick from.
 - The accept and cancel buttons still need to be wired up
-
-- - -
-
-- Something needs to be done with 'current'. having all the action values in
-  the same place will lead to problems
 
 - - -
 
