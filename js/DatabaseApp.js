@@ -7,24 +7,51 @@
             this.name = 'Select';
             this.page = 'partial/select.html';
             this.relation = {name: 'relation'};
-            this.attribute = 'attribute';
-            this.comparison = 'comparison';
-            this.value = 'value';
+
+            this.setDefaults = function(){
+                this.attribute = 'attribute';
+                this.comparison = 'comparison';
+                this.value = 'value';
+            }
+
+            this.setRelation = function(rel){
+                this.setDefaults();
+                this.relation = rel;
+            }
+
+            this.setAttribute = function(attr){
+                this.setDefaults();
+                this.attribute = attr;
+            }
+
+            this.setComparison = function(comp){
+                this.comparison = comp;
+            }
+
+            this.setValue = function(val){
+                this.value = val;
+            }
+
+            this.setDefaults();
         }
 
         var Project = function(){
             this.name = 'Project';
             this.page = 'partial/project.html';
             this.relation = {name: 'relation'};
-            this.attributes = [];
-            this.available = [];
+
+            this.setDefaults = function(){
+                this.attributes = [];
+                this.available = [];
+            }
 
             this.setRelation = function(rel){
+                this.setDefaults();
                 this.relation = rel;
                 this.available = rel.head.slice();          // makes a copy
             }
 
-            this.add = function(attr){
+            this.addAttribute = function(attr){
                 this.attributes.push(attr);
                 var index = this.available.indexOf(attr);
                 if (index != -1){
@@ -34,7 +61,8 @@
                 }
             }
 
-            this.remove = function(attr){
+            this.removeAttribute = function(attr){
+                this.setDefaults();
                 var index = this.attributes.indexOf(attr);
                 if (index != -1){
                     this.attributes.splice(index, 1);
@@ -44,6 +72,7 @@
                 this.available.push(attr);
             }
 
+            this.setDefaults();
         }
 
         var Join = function(){
@@ -52,6 +81,59 @@
             this.relation1 = {name: 'relation'};
             this.relation2 = {name: 'relation'};
             this.attribute = 'attribute';
+            this.available = [];
+
+            this.getAvailable = function(){
+                if (!this.relation1.head || !this.relation2.head){
+                    return;
+                }
+
+                var list1 = this.relation1.head.slice(),
+                    list2 = this.relation2.head.slice(),
+                    listOut = [];
+
+                list1.sort();
+                list2.sort();
+
+                console.log(list1);
+                console.log(list2);
+
+                while (list1.length != 0 && list2.length != 0){
+                    console.log(list1[0]);
+                    console.log(list2[0]);
+                    if (list1[0] < list2[0]){
+                        list1.splice(0, 1);
+                    } else if (list1[0] > list2[0]){
+                        list2.splice(0, 1);
+                    } else {
+                        listOut.push(list1[0]);
+                        list1.splice(0, 1);
+                        list2.splice(0, 1);
+                    }
+                }
+
+                this.available = listOut;
+            }
+
+            this.getShared = function(){
+                return this.available;
+            }
+
+            this.setRelation1 = function(rel){
+                this.attribute = 'attribute';
+                this.relation1 = rel;
+                this.getAvailable();
+            }
+
+            this.setRelation2 = function(rel){
+                this.attribute = 'attribute';
+                this.relation2 = rel;
+                this.getAvailable();
+            }
+
+            this.setAttribute = function(attr){
+                this.attribute = attr;
+            }
         }
 
         $scope.setSelect = function(){

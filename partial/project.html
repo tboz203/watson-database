@@ -9,13 +9,13 @@ FROM <span class='dropdown'>
 PROJECT
 <span class='dropdown' ng-repeat='attr in action.attributes'>
     <a class='dropdown-toggle' ng-bind='attr + ", "'></a>
-    <button class='dropdown-menu btn btn-danger' ng-click='action.remove(attr)'>Remove</button>
+    <button class='dropdown-menu btn btn-danger' ng-click='action.removeAttribute(attr)'>Remove</button>
 </span>
 <span class='dropdown'>
     <a class='dropdown-toggle'>attribute</a>
     <ul class='dropdown-menu text-left'>
         <li ng-repeat='attr in action.available'>
-        <a ng-click='action.add(attr)' ng-bind='attr'></a>
+        <a ng-click='action.addAttribute(attr)' ng-bind='attr'></a>
         </li>
     </ul>
 </span>
