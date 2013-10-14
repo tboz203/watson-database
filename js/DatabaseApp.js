@@ -11,7 +11,7 @@
 
                 this.setDefaults = function(){
                     this.attribute = 'attribute';
-                    this.comparison = 'comparison';
+                    this.condition = 'condition';
                     this.value = 'value';
                 }
 
@@ -25,8 +25,8 @@
                     this.attribute = attr;
                 }
 
-                this.setComparison = function(comp){
-                    this.comparison = comp;
+                this.setCondition = function(comp){
+                    this.condition = comp;
                 }
 
                 this.setValue = function(val){
@@ -65,7 +65,6 @@
                 }
 
                 this.removeAttribute = function(attr){
-                    this.setDefaults();
                     var index = this.attributes.indexOf(attr);
                     if (index != -1){
                         this.attributes.splice(index, 1);

@@ -15,7 +15,7 @@ SELECT WHERE <span class='dropdown'>
     </ul>
 </span>
 <span class='dropdown'>
-    <a class='dropdown-toggle' ng-bind='action.comparison'></a>
+    <a class='dropdown-toggle' ng-bind='action.condition'></a>
     <ul class='dropdown-menu text-left'>
         <li ng-repeat='cond in getRelConditions()'>
         <a ng-click='action.setCondition(cond)' ng-bind='cond'></a>
