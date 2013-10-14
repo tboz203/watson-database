@@ -3,7 +3,7 @@
 
     app.controller('DatabaseController', function($scope){
 
-        $scope.Select = function Select(){
+        $scope.Select = function(){
             return new function(){
                 this.name = 'Select';
                 this.page = 'partial/select.html';
@@ -37,7 +37,7 @@
             }
         }
 
-        $scope.Project = function Project(){
+        $scope.Project = function(){
             return new function(){
                 this.name = 'Project';
                 this.page = 'partial/project.html';
@@ -79,7 +79,7 @@
             }
         }
 
-        $scope.Join = function Join(){
+        $scope.Join = function(){
             return new function(){
                 this.name = 'Join';
                 this.page = 'partial/join.html';
