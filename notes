@@ -3,6 +3,7 @@
 - The dropdown links in (first the select relation and then) all relations
    need to fetch appropriate values to pick from.
 - The accept and cancel buttons still need to be wired up
+- The 'active' state in the list-buttons is being weird...
 
 - - -
 
