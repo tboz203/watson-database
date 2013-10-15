@@ -167,6 +167,18 @@
             ];
         };
 
+        /*
+        $scope.getComparisonValues = function(rel, attr)){
+            if (typeof(attr) == 'string'){
+                // we need to get that column
+                var index = rel.head.indexOf(attr),
+                    output = [];
+
+                for (var i = 0; i < rel.rows.length; i++){
+
+        */
+
+
         $scope.relations = {
             students: {
                 name: 'Students',
