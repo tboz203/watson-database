@@ -7,12 +7,12 @@
             return new function(){
                 this.name = 'Select';
                 this.page = 'partial/select.html';
-                this.relation = {name: 'relation'};
+                this.relation = {name: '[relation]'};
 
                 this.setDefaults = function(){
-                    this.attribute = 'attribute';
-                    this.condition = 'condition';
-                    this.value = 'value';
+                    this.attribute = '[attribute]';
+                    this.condition = '[condition]';
+                    this.value = '[value]';
                 }
 
                 this.setRelation = function(rel){
@@ -41,7 +41,8 @@
             return new function(){
                 this.name = 'Project';
                 this.page = 'partial/project.html';
-                this.relation = {name: 'relation'};
+                this.relation = {name: '[relation]'};
+                this.dropdown = '[attribute]'
 
                 this.setDefaults = function(){
                     this.attributes = [];
@@ -82,9 +83,9 @@
             return new function(){
                 this.name = 'Join';
                 this.page = 'partial/join.html';
-                this.relation1 = {name: 'relation'};
-                this.relation2 = {name: 'relation'};
-                this.attribute = 'attribute';
+                this.relation1 = {name: '[relation]'};
+                this.relation2 = {name: '[relation]'};
+                this.attribute = '[attribute]';
                 this.available = [];
 
                 this.getAvailable = function(){
@@ -124,13 +125,13 @@
                 }
 
                 this.setRelation1 = function(rel){
-                    this.attribute = 'attribute';
+                    this.attribute = '[attribute]';
                     this.relation1 = rel;
                     this.getAvailable();
                 }
 
                 this.setRelation2 = function(rel){
-                    this.attribute = 'attribute';
+                    this.attribute = '[attribute]';
                     this.relation2 = rel;
                     this.getAvailable();
                 }

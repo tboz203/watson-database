@@ -17,7 +17,7 @@ AND <span class='dropdown'>
 OVER <span class='dropdown'>
     <a class='dropdown-toggle' ng-bind='action.attribute'></a>
     <ul class='dropdown-menu text-left'>
-        <li ng-repeat='attr in getShared(action.relation1, action.relation2)'>
+        <li ng-repeat='attr in action.getShared()'>
         <a ng-click='action.setAttribute(attr)' ng-bind='attr'></a>
         </li>
     </ul>
