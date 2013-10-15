@@ -3,6 +3,10 @@
 
     app.controller('DatabaseController', function($scope){
 
+        $scope.error = function(){
+            document.write('<h1>SOMETHING WENT BAD WRONG.</h1>')
+        }
+
         $scope.Select = function(){
             return new function(){
                 this.name = 'Select';

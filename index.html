@@ -1,65 +1,65 @@
 <!DOCTYPE html>
 <html ng-app='DatabaseApp'>
-<head>
-<title>Database Lab</title>
-<link rel='stylesheet' href='lib/bootstrap-3.css'>
-<link rel='stylesheet' href='css/database.css'>
-</head>
-<body ng-controller='DatabaseController'>
-<!-- Main Container - covers entire page -->
-<div class='container'>
-    <h1>Watson Database Lab</h1>
-    <hr>
-    <!-- Relation Editor View -->
-    <div>
-        <!-- Relation Editor Group -->
-        <span class='input-group input-group-lg'>
-            <!-- 'Action' button -->
-            <span class='input-group-btn'>
-                <button class='btn btn-default dropdown-toggle' ng-bind="action.name"><span class='caret'></span></button>
-                <ul class='dropdown-menu'>
-                    <li><a tabindex='-1' ng-click='action = Select()'>Select</a></li>
-                    <li><a tabindex='-1' ng-click='action = Project()'>Project</a></li>
-                    <li><a tabindex='-1' ng-click='action = Join()'>Join</a></li>
-                </ul>
-            </span>
-            <!-- Action View -->
-            <div ng-include='action.page' class='form-control well text-center'></div>
-            <!-- Accept/Cancel buttons -->
-            <span class='input-group-btn'>
-                <button type='button' class='btn btn-success'>Accept</button>
-                <button type='button' class='btn btn-danger'>Cancel</button>
-            </span>
-        </span> <!-- End Relationship Editor Group -->
-    </div> <!-- End Relationship Editor View -->
-    <hr>
-    <!-- Relation List View -->
-    <div class='list-group list-group-sm'>
-        <!-- '$parent' required because the ng-repeat creates a new inner scope -->
-        <li class='btn btn-default list-group-item list-group-btn' ng-repeat='rel in relations' ng-model='$parent.relation' btn-radio='rel' ng-bind="rel.name"></li>
-    </div>
-    <!-- Relation View -->
-    <div>
-        <table class='table table-striped table-condensed'>
-            <thead>
-                <th ng-repeat='item in relation.head'>
-                    <span ng-bind="item"></span>
-                </th>
-            </thead>
-            <tbody>
-            <tr ng-repeat='row in relation.rows'>
-                <td ng-repeat='item in row'>
-                    <span ng-bind="item"></span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div> <!-- End Relation View -->
-</div> <!-- End Main Container -->
-<script type='text/javascript' src='lib/jquery.js'></script>
-<script type='text/javascript' src='lib/angular.js'></script>
-<script type='text/javascript' src='lib/bootstrap-3.js'></script>
-<script type='text/javascript' src='lib/ui-bootstrap.js'></script>
-<script type='text/javascript' src='js/DatabaseApp.js'></script>
-</body>
+    <head>
+        <title>Database Lab</title>
+        <link rel='stylesheet' href='lib/bootstrap-3.css'>
+        <link rel='stylesheet' href='css/database.css'>
+    </head>
+    <body ng-controller='DatabaseController'>
+        <!-- Main Container - covers entire page -->
+        <div class='container'>
+            <h1>Watson Database Lab</h1>
+            <hr>
+            <!-- Relation Editor View -->
+            <div>
+                <!-- Relation Editor Group -->
+                <span class='input-group input-group-lg'>
+                    <!-- 'Action' button -->
+                    <span class='input-group-btn'>
+                        <button class='btn btn-default dropdown-toggle' ng-bind="action.name"><span class='caret'></span></button>
+                        <ul class='dropdown-menu'>
+                            <li><a tabindex='-1' ng-click='action = Select()'>Select</a></li>
+                            <li><a tabindex='-1' ng-click='action = Project()'>Project</a></li>
+                            <li><a tabindex='-1' ng-click='action = Join()'>Join</a></li>
+                        </ul>
+                    </span>
+                    <!-- Action View -->
+                    <div ng-include='action.page' class='form-control well text-center'></div>
+                    <!-- Accept/Cancel buttons -->
+                    <span class='input-group-btn'>
+                        <button type='button' class='btn btn-success'>Accept</button>
+                        <button type='button' class='btn btn-danger'>Cancel</button>
+                    </span>
+                </span> <!-- End Relationship Editor Group -->
+            </div> <!-- End Relationship Editor View -->
+            <hr>
+            <!-- Relation List View -->
+            <div class='list-group list-group-sm'>
+                <!-- '$parent' required because the ng-repeat creates a new inner scope -->
+                <li class='btn btn-default list-group-item list-group-btn' ng-repeat='rel in relations' ng-model='$parent.relation' btn-radio='rel' ng-bind="rel.name"></li>
+            </div>
+            <!-- Relation View -->
+            <div>
+                <table class='table table-striped table-condensed'>
+                    <thead>
+                        <th ng-repeat='item in relation.head'>
+                            <span ng-bind="item"></span>
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat='row in relation.rows'>
+                            <td ng-repeat='item in row'>
+                                <span ng-bind="item"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> <!-- End Relation View -->
+        </div> <!-- End Main Container -->
+        <script type='text/javascript' src='lib/jquery.js'></script>
+        <script type='text/javascript' src='lib/angular.js'></script>
+        <script type='text/javascript' src='lib/bootstrap-3.js'></script>
+        <script type='text/javascript' src='lib/ui-bootstrap.js'></script>
+        <script type='text/javascript' src='js/DatabaseApp.js'></script>
+    </body>
 </html>
