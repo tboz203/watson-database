@@ -18,9 +18,9 @@
             <span class='input-group-btn'>
                 <button class='btn btn-default dropdown-toggle' ng-bind="action.name"><span class='caret'></span></button>
                 <ul class='dropdown-menu'>
-                    <li><a tabindex='-1' ng-click='setSelect()'>Select</a></li>
-                    <li><a tabindex='-1' ng-click='setProject()'>Project</a></li>
-                    <li><a tabindex='-1' ng-click='setJoin()'>Join</a></li>
+                    <li><a tabindex='-1' ng-click='action = Select()'>Select</a></li>
+                    <li><a tabindex='-1' ng-click='action = Project()'>Project</a></li>
+                    <li><a tabindex='-1' ng-click='action = Join()'>Join</a></li>
                 </ul>
             </span>
             <!-- Action View -->

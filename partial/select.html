@@ -2,7 +2,7 @@ FROM <span class='dropdown'>
     <a class='dropdown-toggle' ng-bind='action.relation.name'></a>
     <ul class='dropdown-menu text-left'>
         <li ng-repeat='rel in relations'>
-        <a ng-click='action.relation = rel' ng-bind='rel.name'></a>
+        <a ng-click='action.setRelation(rel)' ng-bind='rel.name'></a>
         </li>
     </ul>
 </span>
@@ -10,15 +10,15 @@ SELECT WHERE <span class='dropdown'>
     <a class='dropdown-toggle' ng-bind='action.attribute'></a>
     <ul class='dropdown-menu text-left'>
         <li ng-repeat='attr in action.relation.head'>
-        <a ng-click='action.attribute = attr' ng-bind='attr'></a>
+        <a ng-click='action.setAttribute(attr)' ng-bind='attr'></a>
         </li>
     </ul>
 </span>
 <span class='dropdown'>
-    <a class='dropdown-toggle' ng-bind='action.comparison'></a>
+    <a class='dropdown-toggle' ng-bind='action.condition'></a>
     <ul class='dropdown-menu text-left'>
         <li ng-repeat='cond in getRelConditions()'>
-        <a ng-click='action.comparison = cond' ng-bind='cond'></a>
+        <a ng-click='action.setCondition(cond)' ng-bind='cond'></a>
         </li>
     </ul>
 </span>
@@ -26,7 +26,7 @@ SELECT WHERE <span class='dropdown'>
     <a class='dropdown-toggle' ng-bind='action.value'></a>
     <ul class='dropdown-menu text-left'>
         <li ng-repeat='val in getComparisonValues()'>
-        <a ng-click='action.value = val' ng-bind='val'></a>
+        <a ng-click='action.setValue(val)' ng-bind='val'></a>
         </li>
     </ul>
 </span>
