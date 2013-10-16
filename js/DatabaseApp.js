@@ -37,6 +37,43 @@
                     this.value = val;
                 }
 
+                this.accept = function(){
+                    // ok, our mission here is to take what we were passed and
+                    // to make from it a new relation and add it to the list
+
+                    var rows = this.relation.rows,
+                        index = this.relation.head.indexOf(this.attribute),
+                        r_name = 'R1',
+                        r_out = {
+                            name: r_name,
+                            head: this.relation.head.slice(),
+                            rows: []
+                        };
+
+                    var filter;
+                    if (this.condition == '<'){
+                        filter = function(val){ return this.value < val; }
+                    } else if (this.condition == '<='){
+                        filter = function(val){ return this.value <= val; }
+                    } else if (this.condition == '>'){
+                        filter = function(val){ return this.value > val; }
+                    } else if (this.condition == '>='){
+                        filter = function(val){ return this.value >= val; }
+                    } else if (this.condition == '=='){
+                        filter = function(val){ return this.value == val; }
+                    } else if (this.condition == '!='){
+                        filter = function(val){ return this.value != val; }
+                    }
+
+                    for (var i = 0; i < rows.length; i++){
+                        if (filter(rows[i][index])){
+                            r_out.rows.push(rows[i]);
+                        }
+                    }
+
+                    $scope.relations[r_out.name] = r_out;
+                }
+
                 this.setDefaults();
             }
         }
@@ -193,6 +230,7 @@
             }
 */
         }
+
         $scope.relations = {
             students: {
                 name: 'Students',
