@@ -25,7 +25,7 @@ SELECT WHERE <span class='dropdown'>
 <span class='dropdown'>
     <a class='dropdown-toggle' ng-bind='action.value'></a>
     <ul class='dropdown-menu text-left'>
-        <li ng-repeat='val in getComparisonValues()'>
+        <li ng-repeat='val in getComparisonValues(action.relation, action.attribute)'>
         <a ng-click='action.setValue(val)' ng-bind='val'></a>
         </li>
     </ul>

@@ -167,18 +167,32 @@
             ];
         };
 
-        /*
-        $scope.getComparisonValues = function(rel, attr)){
-            if (typeof(attr) == 'string'){
+        // Give me the relation and an attribute, and i'll give you a list of
+        // that attribute in the relation
+        $scope.getComparisonValues = function(rel, attr){
+            if (!rel.head){
+                return;
+            }
+            var index = rel.head.indexOf(attr),
+                t = typeof(rel.rows[0][index])
+                output = [];
+            console.log(t);
+//            if (t == 'string'){
                 // we need to get that column
-                var index = rel.head.indexOf(attr),
-                    output = [];
 
                 for (var i = 0; i < rel.rows.length; i++){
+                    output.push(rel.rows[i][index]);
+                }
 
-        */
+                return output;
 
-
+/*
+            } else if (t == 'number'){
+                // need to pull up the ng-numpad thing
+                return [];
+            }
+*/
+        }
         $scope.relations = {
             students: {
                 name: 'Students',
@@ -206,6 +220,7 @@
                     ['Walker R.',       21, 'CS',   55555520, 'M', '9 Iron Drive',      'Monroe',   'LA']
                 ]
             }, faculty: {
+
                 name: 'Faculty',
                 head: ['FName', 'Dept', 'Office', 'Phone', 'SSN', 'Salary'],
                 rows: [
