@@ -3,12 +3,64 @@
 
     app.controller('DatabaseController', function($scope){
 
+        $scope.action = {name: 'Action'};
+
         $scope.error = function(){
-            document.write('<h1>SOMETHING WENT BAD WRONG.</h1>')
+            document.write('<h1>SOMETHING WENT BAD WRONG.</h1>');
         }
 
+        $scope.getRelConditions = function(){
+            //{{{
+            return [
+                '<',
+                '<=',
+                '>',
+                '>=',
+                '==',
+                '!='
+            ];
+        };
+        //}}}
+
+        $scope.getConditionValues = function(rel, attr){
+            //{{{
+            if (!rel.head){
+                return;
+            }
+            var index = rel.head.indexOf(attr),
+                t = typeof(rel.rows[0][index])
+                output = [];
+//          if (t == 'string'){
+                // we need to get that column
+                for (var i = 0; i < rel.rows.length; i++){
+                    var item = rel.rows[i][index];
+                    if (output.indexOf(item) == -1){
+                        output.push(item);
+                    }
+                }
+                return output.sort();
+//          } else if (t == 'number'){
+//              // need to pull up the ng-numpad thing
+//              return [];
+//          }
+        }
+        //}}}
+
+        var getNext = function(){
+            //{{{
+            var counter = 0;
+            getNext = function(){
+                counter += 1;
+                return counter;
+            }
+            return getNext();
+        }
+        //}}}
+
         $scope.Select = function(){
+            // {{{
             return new function(){
+                //{{{
                 this.name = 'Select';
                 this.page = 'partial/select.html';
                 this.relation = {name: '[relation]'};
@@ -36,50 +88,58 @@
                 this.setValue = function(val){
                     this.value = val;
                 }
+                //}}}
 
                 this.accept = function(){
+                    //{{{
                     // ok, our mission here is to take what we were passed and
                     // to make from it a new relation and add it to the list
 
                     var rows = this.relation.rows,
+                        r_name = 'R' + getNext();
                         index = this.relation.head.indexOf(this.attribute),
-                        r_name = 'R1',
                         r_out = {
                             name: r_name,
+                            display_name: r_name + ' <- SELECT FROM ' + this.relation.name + ' WHERE ' + this.attribute + ' ' + this.condition + ' ' + this.value + ';',
                             head: this.relation.head.slice(),
                             rows: []
                         };
 
                     var filter;
                     if (this.condition == '<'){
-                        filter = function(val){ return this.value < val; }
+                        filter = function(val1, val2){ return (val1 < val2); }
                     } else if (this.condition == '<='){
-                        filter = function(val){ return this.value <= val; }
+                        filter = function(val1, val2){ return (val1 <= val2); }
                     } else if (this.condition == '>'){
-                        filter = function(val){ return this.value > val; }
+                        filter = function(val1, val2){ return (val1 > val2); }
                     } else if (this.condition == '>='){
-                        filter = function(val){ return this.value >= val; }
+                        filter = function(val1, val2){ return (val1 >= val2); }
                     } else if (this.condition == '=='){
-                        filter = function(val){ return this.value == val; }
+                        filter = function(val1, val2){ return (val1 == val2); }
                     } else if (this.condition == '!='){
-                        filter = function(val){ return this.value != val; }
+                        filter = function(val1, val2){ return (val1 != val2); }
                     }
 
                     for (var i = 0; i < rows.length; i++){
-                        if (filter(rows[i][index])){
+                        if (filter(rows[i][index], this.value)){
                             r_out.rows.push(rows[i]);
                         }
                     }
 
                     $scope.relations[r_out.name] = r_out;
+                    $scope.action = {name: 'Action'}
                 }
+                //}}}
 
                 this.setDefaults();
             }
         }
+        //}}}
 
         $scope.Project = function(){
+            //{{{
             return new function(){
+                //{{{
                 this.name = 'Project';
                 this.page = 'partial/project.html';
                 this.relation = {name: '[relation]'};
@@ -115,13 +175,50 @@
                     }
                     this.available.push(attr);
                 }
+                //}}}
+
+                this.accept = function(){
+                    //{{{
+                    // so we're taking the list of attributes we're given and
+                    // making a new relation from them.
+
+                    var head = this.relation.head,
+                        rows = this.relation.rows,
+                        r_name = 'R' + getNext(),
+                        indices = [],
+                        r_out = {
+                            name: r_name,
+                            display_name: r_name + ' <- PROJECT ' + this.attributes.join(', ') + ' FROM ' + this.relation.name + ';',
+                            head: this.attributes,
+                            rows: []
+                        };
+
+                    for (var i = 0; i < this.attributes.length; i++){
+                        indices.push(head.indexOf(this.attributes[i]));
+                    }
+
+                    for (var i = 0; i < rows.length; i++){
+                        var row = [];
+                        for (var j = 0; j < indices.length; j++){
+                            row.push(rows[i][indices[j]]);
+                        }
+                        r_out.rows.push(row);
+                    }
+
+                    $scope.relations[r_out.name] = r_out;
+                    $scope.action = {name: 'Action'};
+                }
+                //}}}
 
                 this.setDefaults();
             }
         }
+        //}}}
 
         $scope.Join = function(){
+            //{{{
             return new function(){
+                //{{{
                 this.name = 'Join';
                 this.page = 'partial/join.html';
                 this.relation1 = {name: '[relation]'};
@@ -141,12 +238,8 @@
                     list1.sort();
                     list2.sort();
 
-                    console.log(list1);
-                    console.log(list2);
 
                     while (list1.length != 0 && list2.length != 0){
-                        console.log(list1[0]);
-                        console.log(list2[0]);
                         if (list1[0] < list2[0]){
                             list1.splice(0, 1);
                         } else if (list1[0] > list2[0]){
@@ -180,60 +273,43 @@
                 this.setAttribute = function(attr){
                     this.attribute = attr;
                 }
-            }
-        }
+                //}}}
 
-        $scope.action = {name: 'Action'};
+                this.accept = function(){
+                    //{{{
+                    // joining two relations over the passed attribute
 
-        $scope.getRelConditions = function(){
-            return [
-                '<',
-                '<=',
-                '>',
-                '>=',
-                '==',
-                '!='
-            ];
-        };
+                    var both = this.relation1.head + this.relation2.head,
+                        r_name = getNextName(),
+                        r_out = {
+                            name: r_name,
+                            display_name: r_name + ' <- JOIN ' + this.relation1.name + ' AND ' + this.relation2.name + ' OVER ' + this.attribute + ';',
+                            head: [],
+                            rows: []
+                        }
 
-        $scope.getComparisonValues = function(){
-            return [
-                'Value 1',
-                'Value 2',
-                'Value 3'
-            ];
-        };
+                    r_out.head.push(this.attribute);
+                    for (var i = 0; i < both.length; i++){
+                        if (r_out.head.indexOf(both[i]) == -1){
+                            r_out.head.push(both[i]);
+                        }
+                    }
 
-        // Give me the relation and an attribute, and i'll give you a list of
-        // that attribute in the relation
-        $scope.getComparisonValues = function(rel, attr){
-            if (!rel.head){
-                return;
-            }
-            var index = rel.head.indexOf(attr),
-                t = typeof(rel.rows[0][index])
-                output = [];
-            console.log(t);
-//            if (t == 'string'){
-                // we need to get that column
+                    // ok, so. how does join tables?
+                    //
+                    // like seriously, i'm having trouble with this.
 
-                for (var i = 0; i < rel.rows.length; i++){
-                    output.push(rel.rows[i][index]);
                 }
-
-                return output;
-
-/*
-            } else if (t == 'number'){
-                // need to pull up the ng-numpad thing
-                return [];
+                //}}}
             }
-*/
         }
+        //}}}
 
         $scope.relations = {
             students: {
+                //{{{
                 name: 'Students',
+                display_name: 'Students',
                 head: ['SName', 'Age', 'Major', 'ID', 'Sex', 'Address', 'City', 'State'],
                 rows: [
                     ['Anderson B.',     19, 'CS',   55555501, 'M', '101 Rocket Way',    'Atlantis', 'CA'],
@@ -257,9 +333,12 @@
                     ['Walker J.',       23, 'CS',   55555519, 'M', '42 Ocean Drive',    'Venice',   'CA'],
                     ['Walker R.',       21, 'CS',   55555520, 'M', '9 Iron Drive',      'Monroe',   'LA']
                 ]
-            }, faculty: {
-
+            },
+            //}}}
+            faculty: {
+                //{{{
                 name: 'Faculty',
+                display_name: 'Faculty',
                 head: ['FName', 'Dept', 'Office', 'Phone', 'SSN', 'Salary'],
                 rows: [
                     ['Kurtz B. L.',     'CompSci',      'NH 224',   2571111, 111223333, 70000],
@@ -270,8 +349,12 @@
                     ['Springer T.',     'Psychology',   'WH 123',   2575555, 666778888, 47000],
                     ['Johnson R.',      'English',      'GTM 111',  2576666, 777889999, 40000]
                 ]
-            }, courses: {
+            },
+            //}}}
+            courses: {
+                //{{{
                 name: 'Courses',
+                display_name: 'Courses',
                 head: ['FName', 'SEQ_NO', 'Course', 'Quarter', 'Year', 'Credits'],
                 rows: [
                     ['Oneal M.B.',   100001, 'CS 100',   'FALL',     2005, 3],
@@ -288,8 +371,12 @@
                     ['Kurtz B.L.',   100012, 'CS 220',   'FALL',     2006, 3],
                     ['Oneal M.B.',   100013, 'CS 100',   'WINTER',   2007, 3]
                 ]
-            }, grades: {
+            },
+            //}}}
+            grades: {
+                //{{{
                 name: 'Grades',
+                display_name: 'Grades',
                 head: ['ID', 'SEQ_NO', 'Grade'],
                 rows: [
                     [55555501, 100001, 'A'],
@@ -370,6 +457,7 @@
                     [55555519, 100011, 'B']
                 ]
             },
+            //}}}
         }
     });
 })();

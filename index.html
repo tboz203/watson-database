@@ -28,7 +28,7 @@
                     <!-- Accept/Cancel buttons -->
                     <span class='input-group-btn'>
                         <button type='button' class='btn btn-success' ng-click='action.accept()'>Accept</button>
-                        <button type='button' class='btn btn-danger'>Cancel</button>
+                        <button type='button' class='btn btn-danger' ng-click='action = {name:"Action"}'>Cancel</button>
                     </span>
                 </span> <!-- End Relationship Editor Group -->
             </div> <!-- End Relationship Editor View -->
@@ -36,7 +36,7 @@
             <!-- Relation List View -->
             <div class='list-group list-group-sm'>
                 <!-- '$parent' required because the ng-repeat creates a new inner scope -->
-                <li class='btn btn-default list-group-item list-group-btn' ng-repeat='rel in relations' ng-model='$parent.relation' btn-radio='rel' ng-bind="rel.name"></li>
+                <li class='btn btn-default list-group-item list-group-btn' ng-repeat='rel in relations' ng-model='$parent.relation' btn-radio='rel' ng-bind="rel.display_name"></li>
             </div>
             <!-- Relation View -->
             <div>

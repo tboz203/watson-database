@@ -1,4 +1,4 @@
-FROM <span class='dropdown'>
+SELECT FROM <span class='dropdown'>
     <a class='dropdown-toggle' ng-bind='action.relation.name'></a>
     <ul class='dropdown-menu text-left'>
         <li ng-repeat='rel in relations'>
@@ -6,7 +6,7 @@ FROM <span class='dropdown'>
         </li>
     </ul>
 </span>
-SELECT WHERE <span class='dropdown'>
+WHERE <span class='dropdown'>
     <a class='dropdown-toggle' ng-bind='action.attribute'></a>
     <ul class='dropdown-menu text-left'>
         <li ng-repeat='attr in action.relation.head'>
@@ -25,7 +25,7 @@ SELECT WHERE <span class='dropdown'>
 <span class='dropdown'>
     <a class='dropdown-toggle' ng-bind='action.value'></a>
     <ul class='dropdown-menu text-left'>
-        <li ng-repeat='val in getComparisonValues(action.relation, action.attribute)'>
+        <li ng-repeat='val in getConditionValues(action.relation, action.attribute)'>
         <a ng-click='action.setValue(val)' ng-bind='val'></a>
         </li>
     </ul>
