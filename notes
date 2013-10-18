@@ -7,6 +7,8 @@
 - __Multi-line editor?__
   - to work w/ the walkthrough
   - all the statements at once
+- _for join_: 
+  - look at 'QueryJoin' in DatabaseServer.java in the watson src tree
 
 - - -
 
