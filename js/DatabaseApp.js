@@ -49,11 +49,11 @@
     var getNextName = function(){
       //{{{
       var counter = 0;
-      getNext = function(){
+      getNextName = function(){
         counter += 1;
         return 'Relation' + counter;
       }
-      return getNext();
+      return getNextName();
     }
     //}}}
 
