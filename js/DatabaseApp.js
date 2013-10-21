@@ -46,12 +46,12 @@
         }
         //}}}
 
-        var getNext = function(){
+        var getNextName = function(){
             //{{{
             var counter = 0;
             getNext = function(){
                 counter += 1;
-                return counter;
+                return 'Relation' + counter;
             }
             return getNext();
         }
@@ -92,15 +92,14 @@
 
                 this.accept = function(){
                     //{{{
-                    // ok, our mission here is to take what we were passed and
-                    // to make from it a new relation and add it to the list
 
                     var rows = this.relation.rows,
-                        r_name = 'R' + getNext();
+                        r_name = getNextName();
                         index = this.relation.head.indexOf(this.attribute),
                         r_out = {
                             name: r_name,
-                            display_name: r_name + ' <- SELECT FROM ' + this.relation.name + ' WHERE ' + this.attribute + ' ' + this.condition + ' ' + this.value + ';',
+                            display_name: r_name+' <- SELECT FROM '+this.relation.name+
+                                    ' WHERE '+this.attribute+' '+this.condition+' '+this.value+';',
                             head: this.relation.head.slice(),
                             rows: []
                         };
@@ -184,11 +183,12 @@
 
                     var head = this.relation.head,
                         rows = this.relation.rows,
-                        r_name = 'R' + getNext(),
+                        r_name = getNextName(),
                         indices = [],
                         r_out = {
                             name: r_name,
-                            display_name: r_name + ' <- PROJECT ' + this.attributes.join(', ') + ' FROM ' + this.relation.name + ';',
+                            display_name: r_name+' <- PROJECT '+this.attributes.join(', ')+
+                                    ' FROM '+this.relation.name+';',
                             head: this.attributes,
                             rows: []
                         };
@@ -275,36 +275,74 @@
                 }
                 //}}}
 
+                // Fired when Join is active and accept is pressed
+                // joins two tables, and puts the result in $scope.relations
                 this.accept = function(){
                     //{{{
-                    // joining two relations over the passed attribute
+                    // the attributes from both input tables
+                    var both = this.relation1.head.concat(this.relation2.head),
+                            // a name for our resulting relation
+                            r_name = getNextName(),
+                            // our input relations
+                            relA = this.relation1,
+                            relB = this.relation2,
+                            // the indices of the attribute we're joining over
+                            indexA = relA.head.indexOf(this.attribute),
+                            indexB = relB.head.indexOf(this.attribute),
+                            // a list of attributes we're going to ignore when merging tuples
+                            ignore = [],
+                            // the relation itself
+                            r_out = {
+                                name: r_name,
+                                // make the name shown in the table list show how this
+                                // relation was generated
+                                display_name: r_name+' <- JOIN '+this.relation1.name+' AND '+
+                                        this.relation2.name+' OVER '+this.attribute+';',
+                                head: [],
+                                rows: []
+                            }
 
-                    var both = this.relation1.head + this.relation2.head,
-                        r_name = getNextName(),
-                        r_out = {
-                            name: r_name,
-                            display_name: r_name + ' <- JOIN ' + this.relation1.name + ' AND ' + this.relation2.name + ' OVER ' + this.attribute + ';',
-                            head: [],
-                            rows: []
-                        }
-
-                    r_out.head.push(this.attribute);
+                    // for each attr in 'both', if not in the resultant head, add it
                     for (var i = 0; i < both.length; i++){
                         if (r_out.head.indexOf(both[i]) == -1){
                             r_out.head.push(both[i]);
+                        } else {
+                            ignore.push(i);
                         }
                     }
 
-                    // ok, so. how does join tables?
-                    //
-                    // like seriously, i'm having trouble with this.
-
+                    // for each combination of tuples:
+                    for (var i = 0; i < relA.rows.length; i++){
+                        for (var j = 0; j < relB.rows.length; j++){
+                            // if the entries for our attribute-in-question are the same:
+                            if (relA.rows[i][indexA] == relB.rows[j][indexB]) {
+                                // join the tuples!
+                                // 'k' keeps track through the individual tuples, 'p' keeps track
+                                // of them together (keeps us in sync w/ 'both')
+                                var p = 0,
+                                        row = [];
+                                for (var k = 0; k < relA.rows[i].length; k++, p++){
+                                    if (ignore.indexOf(p) == -1){
+                                        row.push(relA.rows[i][k]);
+                                    }
+                                }
+                                for (var k = 0; k < relB.rows[j].length; k++, p++){
+                                    if (ignore.indexOf(p) == -1){
+                                        row.push(relB.rows[j][k]);
+                                    }
+                                }
+                                r_out.rows.push(row)
+                            }
+                        }
+                    }
+                    $scope.relations[r_out.name] = r_out;
                 }
                 //}}}
             }
         }
         //}}}
 
+        // All our data
         $scope.relations = {
             students: {
                 //{{{
