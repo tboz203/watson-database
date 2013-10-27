@@ -7,6 +7,28 @@
     cursor: pointer;
 }
 
+/* By default, buttons inside button groups inside vertical button groups
+ * don't resize to their column. Not sure why? */
+.btn-group-vertical > .btn-group > .btn {
+  width: 100%;
+}
+
+/* working on getting the button group to stick to the bottom of it's
+ * container. */
+#editor {
+  position: relative;
+}
+
+#editor_button_group {
+  position: absolute;
+  bottom: 0;
+}
+
+#editor_button_group .btn {
+  border-width: 2px;
+  border-style: solid;
+}
+
 /* ======================================================================= */
 /* Copied and pasted from bootstrap.css to give preference to buttons.     */
 /* ======================================================================= */

@@ -4,13 +4,12 @@
    need to fetch appropriate values to pick from.
 - The accept and cancel buttons still need to be wired up
 - The 'active' state in the list-buttons is being weird...
-- __Multi-line editor?__
+- *Multi-line editor?*
   - to work w/ the walkthrough
   - all the statements at once
-- _for join_: 
-  - look at 'QueryJoin' in DatabaseServer.java in the watson src tree
+  - **this would probably be more difficult than we want to deal with**
 
-- - -
+---
 
 ### For Mike:
 
@@ -19,20 +18,28 @@
   - either a tool for mike, or not
   - separation of data and logic
 
-- - -
+---
 
 - "play with this" button
 - reset button
 - single stepping through statements
 - How do i make this come alive?
 
-- - -
+---
 
-- don't want 15 instances of the same thing
+- don't want 15 instances of the same lab
 - need a way to 'link' things, per se
 
-- - -
+---
 
-- infinite loop checker
-- query user and such
+- the javascript lab
+  - infinite loop checker
+  - query user and such
 
+---
+
+## Work in progress
+so i'm working on the editor bit again. going to try to set up a history-like
+panel. right now working on getting the buttons to stick to the bottom of the
+div. didn't really find a way to do it in bootstrap, resorting to pure css.
+it's pretty dumb, but it works for now.
