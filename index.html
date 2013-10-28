@@ -13,23 +13,16 @@
     <!-- Relation Editor View -->
     <div id='editor' class='row'>
         <div class='col-lg-10'>
-            <h3>Placeholder</h3>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod<br>
-            tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At<br>
-            vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,<br>
-            no sea takimata sanctus est Lorem ipsum dolor sit amet.<br>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod<br>
-            tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At<br>
-            vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,<br>
-            no sea takimata sanctus est Lorem ipsum dolor sit amet.<br>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod<br>
-            tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At<br>
-            vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,<br>
-            no sea takimata sanctus est Lorem ipsum dolor sit amet.<br>
+            <div id='editor_panel' class='panel panel-default'>
+                <div class='panel-body'>
+                    <div ng-repeat='item in history' ng-bind='item'></div>
+                </div>
+                <div ng-include='action.page' class='panel-footer'></div>
+            </div>
         </div>
         <div id='editor_button_group' class='col-lg-2 btn-group-vertical'>
             <div class='btn-group'>
-                <button type='button' class='btn btn-primary dropdown-toggle' ng-bind='action.name'><span class='caret'></span></button>
+                <button type='button' class='btn btn-primary dropdown-toggle'><span ng-bind='action.name'></span> <span class='caret'></span></button>
                 <ul class='dropdown-menu'>
                     <li><a ng-click='action = Select()'>Select</a></li>
                     <li><a ng-click='action = Project()'>Project</a></li>
@@ -39,30 +32,12 @@
             <button type='button' class='btn btn-success' ng-click='action.accept()'>Accept</button>
             <button type='button' class='btn btn-danger' ng-click='action = {name:"Action"'>Cancel</button>
         </div>
-        <!-- <span class='input-group input-group-lg'> -->
-        <!--     <1!-- 'Action' button --1> -->
-        <!--     <span class='input-group-btn'> -->
-        <!--         <button class='btn btn-default dropdown-toggle' ng-bind="action.name"><span class='caret'></span></button> -->
-        <!--         <ul class='dropdown-menu'> -->
-        <!--             <li><a ng-click='action = Select()'>Select</a></li> -->
-        <!--             <li><a ng-click='action = Project()'>Project</a></li> -->
-        <!--             <li><a ng-click='action = Join()'>Join</a></li> -->
-        <!--         </ul> -->
-        <!--     </span> -->
-        <!--     <1!-- Action View --1> -->
-        <!--     <div ng-include='action.page' class='form-control well text-center'></div> -->
-        <!--     <1!-- Accept/Cancel buttons --1> -->
-        <!--     <span class='input-group-btn'> -->
-        <!--         <button type='button' class='btn btn-success' ng-click='action.accept()'>Accept</button> -->
-        <!--         <button type='button' class='btn btn-danger' ng-click='action = {name:"Action"}'>Cancel</button> -->
-        <!--     </span> -->
-        <!-- </span> -->
     </div> <!-- End Relationship Editor View -->
     <hr>
     <!-- Relation List View -->
     <div class='list-group list-group-sm'>
         <!-- '$parent' required because the ng-repeat creates a new inner scope -->
-        <li class='btn btn-default list-group-item list-group-btn' ng-repeat='rel in relations' ng-model='$parent.relation' btn-radio='rel' ng-bind="rel.display_name"></li>
+        <li class='btn btn-default list-group-item list-group-btn' ng-repeat='rel in relations' ng-model='$parent.relation' btn-radio='rel' ng-bind="rel.name"></li>
     </div> <!-- End Relation List View -->
     <!-- Relation View -->
     <div>
@@ -89,3 +64,4 @@
 <script type='text/javascript' src='js/DatabaseApp.js'></script>
 </body>
 </html>
+<!-- vim: set tw=0 : -->

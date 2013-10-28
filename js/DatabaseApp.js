@@ -3,6 +3,8 @@
 
   app.controller('DatabaseController', function($scope){
 
+    $scope.history = [];
+
     $scope.action = {name: 'Action'};
 
     $scope.error = function(){
@@ -93,17 +95,20 @@
         this.accept = function(){
           //{{{
 
+          // declare some stuff
           var rows = this.relation.rows,
-              r_name = getNextName();
+              r_name = getNextName(),
               index = this.relation.head.indexOf(this.attribute),
+              statement = r_name + ' <- SELECT FROM ' + this.relation.name +
+                  ' WHERE ' + this.attribute + ' ' + this.condition + ' ' +
+                  this.value + ';',
               r_out = {
                 name: r_name,
-                display_name: r_name+' <- SELECT FROM '+this.relation.name+
-                    ' WHERE '+this.attribute+' '+this.condition+' '+this.value+';',
                 head: this.relation.head.slice(),
                 rows: []
               };
 
+          // pull out our comparison operator
           var filter;
           if (this.condition == '<'){
             filter = function(val1, val2){ return (val1 < val2); }
@@ -119,13 +124,18 @@
             filter = function(val1, val2){ return (val1 != val2); }
           }
 
+          // and filter it across our relation
           for (var i = 0; i < rows.length; i++){
             if (filter(rows[i][index], this.value)){
               r_out.rows.push(rows[i]);
             }
           }
 
+          // add this nice relation we've made to our list of relations
           $scope.relations[r_out.name] = r_out;
+          // add this statement to the history
+          $scope.history.push(statement);
+          // and reset the action
           $scope.action = {name: 'Action'}
         }
         //}}}
@@ -178,21 +188,21 @@
 
         this.accept = function(){
           //{{{
-          // so we're taking the list of attributes we're given and
-          // making a new relation from them.
 
+          // declare some stuff
           var head = this.relation.head,
               rows = this.relation.rows,
               r_name = getNextName(),
               indices = [],
+              statement = r_name + ' <- PROJECT ' + this.attributes.join(', ') +
+                  ' FROM ' + this.relation.name + ';',
               r_out = {
                 name: r_name,
-                display_name: r_name+' <- PROJECT '+this.attributes.join(', ')+
-                    ' FROM '+this.relation.name+';',
                 head: this.attributes,
                 rows: []
               };
 
+          // grab the indices of the attributes we're projecting
           for (var i = 0; i < this.attributes.length; i++){
             indices.push(head.indexOf(this.attributes[i]));
           }
@@ -278,6 +288,7 @@
         // joins two tables, and puts the result in $scope.relations
         this.accept = function(){
           //{{{
+
           // the attributes from both input tables
           var both = this.relation1.head.concat(this.relation2.head),
               // a name for our resulting relation
@@ -288,15 +299,14 @@
               // the indices of the attribute we're joining over
               indexA = relA.head.indexOf(this.attribute),
               indexB = relB.head.indexOf(this.attribute),
-              // a list of attributes we're going to ignore when merging tuples
+              // a list of duplicated attributes to ignore when merging tuples
               ignore = [],
               // the relation itself
+              display_name = r_name + ' <- JOIN ' + this.relation1.name +
+                  ' AND ' + this.relation2.name + ' OVER ' + this.attribute +
+                  ';',
               r_out = {
                 name: r_name,
-                // make the name shown in the table list show how this
-                // relation was generated
-                display_name: r_name+' <- JOIN '+this.relation1.name+' AND '+
-                    this.relation2.name+' OVER '+this.attribute+';',
                 head: [],
                 rows: []
               }

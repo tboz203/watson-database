@@ -8,6 +8,8 @@
   - to work w/ the walkthrough
   - all the statements at once
   - **this would probably be more difficult than we want to deal with**
+  - **more of a history view?**
+    - b/c that's kinda what i'm doing, lol
 
 ---
 
@@ -23,7 +25,7 @@
 - "play with this" button
 - reset button
 - single stepping through statements
-- How do i make this come alive?
+- "How do i make this come alive?"
 
 ---
 
@@ -32,9 +34,9 @@
 
 ---
 
-- the javascript lab
-  - infinite loop checker
-  - query user and such
+### the javascript lab
+- infinite loop checker
+- query user and such
 
 ---
 

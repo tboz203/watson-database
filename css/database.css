@@ -7,6 +7,10 @@
     cursor: pointer;
 }
 
+.panel > .panel-footer {
+  min-height: 41px;
+}
+
 /* By default, buttons inside button groups inside vertical button groups
  * don't resize to their column. Not sure why? */
 .btn-group-vertical > .btn-group > .btn {
@@ -22,8 +26,15 @@
 #editor_button_group {
   position: absolute;
   bottom: 0;
+  margin-left: 0;
 }
 
+/* removing excess space from the bottom of the panel */
+#editor_panel {
+  margin-bottom: 0;
+}
+
+/* adding emphasis to the button group buttons w/ thicker borders */
 #editor_button_group .btn {
   border-width: 2px;
   border-style: solid;
@@ -31,6 +42,7 @@
 
 /* ======================================================================= */
 /* Copied and pasted from bootstrap.css to give preference to buttons.     */
+/* (was having issues w/ the buttons inside the list group)                */
 /* ======================================================================= */
 
 .btn-default {
