@@ -1,7 +1,12 @@
+/* ======================================================================= */
+/* this stuff works, so far.                                               */
+/* ======================================================================= */
+
 /* tweaking the relaiton list buttons */
 .list-group-btn {
     text-align: left;
     border-radius: 0px;
+    padding: 6px 12px;
 }
 
 /* making the dropdown-toggles more noticable */
@@ -20,8 +25,6 @@
   width: 100%;
 }
 
-/* working on getting the button group to stick to the bottom of its
- * container. */
 #row_div {
   position: relative;
   min-height: 106px;
@@ -32,22 +35,6 @@
   padding-right: 0;
 }
 
-#statement_div, .panel, .panel-body {
-  height: 100%;
-}
-
-/* #editor_button_group, #statement_div { */
-.btn-group-vertical {
-  position: absolute;
-  bottom: 20px;
-}
-
-/* /1* removing excess space from the bottom of the panel *1/ */
-/* /1* #editor_panel { *1/ */
-/* .row > * { */
-/*   margin-bottom: 0; */
-/* } */
-
 hr {
   margin-top: 0;
 }
@@ -56,6 +43,28 @@ hr {
 #editor_button_group .btn {
   border-width: 2px;
   border-style: solid;
+}
+
+/* ======================================================================= */
+/* this stuff is still experimental                                        */
+/* ======================================================================= */
+
+/* #row_div { */
+#inner_row {
+  position: relative;
+}
+
+#statement_div {
+  /* position: absolute; */
+  /* left: 195px; */
+  bottom: 0;
+}
+
+.btn-group-vertical {
+  position: absolute;
+  padding-bottom: 20px;
+  bottom: 0;
+  /* left: 975px; */
 }
 
 /* ======================================================================= */

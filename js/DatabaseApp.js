@@ -4,10 +4,10 @@
   app.controller('DatabaseController', function($scope){
 
     $scope.history = [
-      // 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',
-      // 'tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At',
-      // 'vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,',
-      // 'no sea takimata sanctus est Lorem ipsum dolor sit amet.'
+      'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',
+      'tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At',
+      'vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,',
+      'no sea takimata sanctus est Lorem ipsum dolor sit amet.'
     ]
 
     $scope.action = {name: 'Action'};
@@ -359,6 +359,10 @@
 
     // All our data
     $scope.relations = {
+      blah: {name: 'blah'},
+      blah1: {name: 'blah1'},
+      blah2: {name: 'blah2'},
+      blah3: {name: 'blah3'},
       students: {
         //{{{
         name: 'Students',
