@@ -47,8 +47,18 @@ For Mike:
 
 * * *
 
-## Work in progress
+### Work in progress
 so i'm working on the editor bit again. going to try to set up a history-like
 panel. right now working on getting the buttons to stick to the bottom of the
 div. didn't really find a way to do it in bootstrap, resorting to pure css.
 it's pretty dumb, but it works for now.
+
+### TODO
+- i think the relationship name needs to be in the statement.
+  - would be simple enough to add a "name" field in each action
+  - just pass it to the accept bit, tada
+- need a fixed-width font for the statements
+- need to add quotes around text entries
+  - do we also need them around tables? we'll check into that.
+
+- *undo?*

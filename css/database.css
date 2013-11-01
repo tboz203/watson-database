@@ -25,9 +25,9 @@
   width: 100%;
 }
 
-#row_div {
+#inner_row {
   position: relative;
-  min-height: 106px;
+  min-height: 126px;
 }
 
 /* getting the padding between row items to work right */
@@ -65,6 +65,15 @@ hr {
   padding-bottom: 20px;
   bottom: 0;
   /* left: 975px; */
+}
+
+/* the "default" action. giving it a different look */
+#default {
+  color: #999999;
+}
+
+.mybutton {
+  padding-right: 15px;
 }
 
 /* ======================================================================= */

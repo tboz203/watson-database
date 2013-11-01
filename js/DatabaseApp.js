@@ -3,14 +3,17 @@
 
   app.controller('DatabaseController', function($scope){
 
-    $scope.history = [
-      'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',
-      'tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At',
-      'vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,',
-      'no sea takimata sanctus est Lorem ipsum dolor sit amet.'
-    ]
+    $scope.history = [];
 
-    $scope.action = {name: 'Action'};
+    $scope.hist_insert = function(statement){
+      history.push({text: statement, remove: function(){
+        // how do we get ahold of this history entry?
+        entry = magic();
+        // somehow prompt user "do you want to rollback this statement, and all
+        // subsequent statements?", if yes: remove however many entries from
+        // both history and relations.
+      }});
+    }
 
     $scope.error = function(){
       document.write('<h1>SOMETHING WENT BAD WRONG.</h1>');
@@ -138,10 +141,12 @@
 
           // add this nice relation we've made to our list of relations
           $scope.relations[r_out.name] = r_out;
+          // display it
+          $scope.relation = r_out;
           // add this statement to the history
           $scope.history.push(statement);
           // and reset the action
-          $scope.action = {name: 'Action'}
+          $scope.action = $scope.Default();
         }
         //}}}
 
@@ -221,7 +226,9 @@
           }
 
           $scope.relations[r_out.name] = r_out;
-          $scope.action = {name: 'Action'};
+          $scope.relation = r_out;
+          $scope.history.push(statement);
+          $scope.action = $scope.Default();
         }
         //}}}
 
@@ -307,7 +314,7 @@
               // a list of duplicated attributes to ignore when merging tuples
               ignore = [],
               // the relation itself
-              display_name = r_name + ' <- JOIN ' + this.relation1.name +
+              statement = r_name + ' <- JOIN ' + this.relation1.name +
                   ' AND ' + this.relation2.name + ' OVER ' + this.attribute +
                   ';',
               r_out = {
@@ -350,19 +357,30 @@
               }
             }
           }
+
+          $scope.relation = r_out;
           $scope.relations[r_out.name] = r_out;
+          $scope.history.push(statement);
+          $scope.action = $scope.Default();
         }
         //}}}
       }
     }
     //}}}
 
+    $scope.Default = function(){
+      // {{{
+      return new function(){
+        this.name = 'Action';
+        this.page = 'partial/default.html';
+      }
+    }
+    // }}}
+
+    $scope.action = $scope.Default();
+
     // All our data
     $scope.relations = {
-      blah: {name: 'blah'},
-      blah1: {name: 'blah1'},
-      blah2: {name: 'blah2'},
-      blah3: {name: 'blah3'},
       students: {
         //{{{
         name: 'Students',
