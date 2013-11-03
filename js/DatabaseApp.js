@@ -10,7 +10,7 @@
     }
 
     var getNextName = function(){
-      //{{{
+      // {{{
       var counter = 0;
       getNextName = function(){
         counter += 1;
@@ -18,10 +18,10 @@
       }
       return getNextName();
     }
-    //}}}
+    // }}}
 
     $scope.getRelConditions = function(){
-      //{{{
+      // {{{
       return [
         '<',
         '<=',
@@ -31,10 +31,10 @@
         '!='
       ];
     };
-    //}}}
+    // }}}
 
     $scope.getConditionValues = function(rel, attr){
-      //{{{
+      // {{{
       if (!rel.head){
         return;
       }
@@ -55,26 +55,35 @@
       //   return [];
       // }
     }
-    //}}}
+    // }}}
 
-    $scope.hist_insert = function(statement){
+    $scope.hist_insert = function(rel){
       // {{{
       var index = $scope.history.length;
-      $scope.history.push({text: statement, remove: function(){
+      $scope.history.push({relation: rel, remove: function(){
         entry = $scope.history[index];
         // somehow prompt user "do you want to rollback this statement, and all
         // subsequent statements?", if yes: remove however many entries from
         // both history and relations.
-        console.log(entry.text);
+
+        // right now, assuming yes.
+        for (var i = $scope.history.length - 1; i >= index; i--){
+          console.log('deleting');
+          console.log($scope.history[i]);
+          console.log($scope.relations[$scope.history[i].relation.name]);
+          delete $scope.relations[$scope.history[i].relation.name];
+          $scope.history.pop();
+        }
+        $scope.relation = $scope.history[$scope.history.length - 1].relation;
       }});
-      console.log($scope.history[index].text);
+      console.log($scope.history[index].relation.statement);
     }
     // }}}
 
     $scope.Select = function(){
       // {{{
       return new function(){
-        //{{{
+        // {{{
         this.name = 'Select';
         this.page = 'partial/select.html';
         this.relation = {name: '[relation]'};
@@ -102,20 +111,20 @@
         this.setValue = function(val){
           this.value = val;
         }
-        //}}}
+        // }}}
 
         this.accept = function(){
-          //{{{
+          // {{{
 
           // declare some stuff
           var rows = this.relation.rows,
               r_name = getNextName(),
               index = this.relation.head.indexOf(this.attribute),
-              statement = r_name + ' <- SELECT FROM ' + this.relation.name +
-                  ' WHERE ' + this.attribute + ' ' + this.condition + ' ' +
-                  this.value + ';',
               r_out = {
                 name: r_name,
+                statement: r_name + ' <- SELECT FROM ' + this.relation.name +
+                    ' WHERE ' + this.attribute + ' ' + this.condition + ' ' +
+                    this.value + ';',
                 head: this.relation.head.slice(),
                 rows: []
               };
@@ -148,21 +157,21 @@
           // display it
           $scope.relation = r_out;
           // add this statement to the history
-          $scope.hist_insert(statement);
+          $scope.hist_insert(r_out);
           // and reset the action
           $scope.action = $scope.Default();
         }
-        //}}}
+        // }}}
 
         this.setDefaults();
       }
     }
-    //}}}
+    // }}}
 
     $scope.Project = function(){
-      //{{{
+      // {{{
       return new function(){
-        //{{{
+        // {{{
         this.name = 'Project';
         this.page = 'partial/project.html';
         this.relation = {name: '[relation]'};
@@ -198,20 +207,20 @@
           }
           this.available.push(attr);
         }
-        //}}}
+        // }}}
 
         this.accept = function(){
-          //{{{
+          // {{{
 
           // declare some stuff
           var head = this.relation.head,
               rows = this.relation.rows,
               r_name = getNextName(),
               indices = [],
-              statement = r_name + ' <- PROJECT ' + this.attributes.join(', ') +
-                  ' FROM ' + this.relation.name + ';',
               r_out = {
                 name: r_name,
+                statement: r_name + ' <- PROJECT ' + this.attributes.join(', ') +
+                    ' FROM ' + this.relation.name + ';',
                 head: this.attributes,
                 rows: []
               };
@@ -231,20 +240,20 @@
 
           $scope.relations[r_out.name] = r_out;
           $scope.relation = r_out;
-          $scope.hist_insert(statement);
+          $scope.hist_insert(r_out);
           $scope.action = $scope.Default();
         }
-        //}}}
+        // }}}
 
         this.setDefaults();
       }
     }
-    //}}}
+    // }}}
 
     $scope.Join = function(){
-      //{{{
+      // {{{
       return new function(){
-        //{{{
+        // {{{
         this.name = 'Join';
         this.page = 'partial/join.html';
         this.relation1 = {name: '[relation]'};
@@ -298,12 +307,12 @@
         this.setAttribute = function(attr){
           this.attribute = attr;
         }
-        //}}}
+        // }}}
 
         // Fired when Join is active and accept is pressed
         // joins two tables, and puts the result in $scope.relations
         this.accept = function(){
-          //{{{
+          // {{{
 
           // the attributes from both input tables
           var both = this.relation1.head.concat(this.relation2.head),
@@ -318,11 +327,10 @@
               // a list of duplicated attributes to ignore when merging tuples
               ignore = [],
               // the relation itself
-              statement = r_name + ' <- JOIN ' + this.relation1.name +
-                  ' AND ' + this.relation2.name + ' OVER ' + this.attribute +
-                  ';',
               r_out = {
                 name: r_name,
+                statement: r_name + ' <- JOIN ' + this.relation1.name + ' AND ' +
+                    this.relation2.name + ' OVER ' + this.attribute + ';',
                 head: [],
                 rows: []
               }
@@ -364,13 +372,13 @@
 
           $scope.relation = r_out;
           $scope.relations[r_out.name] = r_out;
-          $scope.hist_insert(statement);
+          $scope.hist_insert(r_out);
           $scope.action = $scope.Default();
         }
-        //}}}
+        // }}}
       }
     }
-    //}}}
+    // }}}
 
     $scope.Default = function(){
       // {{{
@@ -385,7 +393,7 @@
 
     // All our data
     $scope.relations = {
-      //{{{
+      // {{{
       students: {
         name: 'Students',
         display_name: 'Students',

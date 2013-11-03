@@ -25,7 +25,7 @@
                     <div id='editor_panel' class='panel panel-default'>
                         <div id='history' class='panel-body'>
                             <div ng-repeat='item in history'>
-                                <span ng-bind='item.text'></span>
+                                <span ng-bind='item.relation.statement'></span>
                                 <span class='mybutton pull-right text-danger glyphicon glyphicon-remove-sign' ng-click='item.remove()'></span>
                             </div>
                         </div>
