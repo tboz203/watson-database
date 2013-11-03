@@ -5,19 +5,20 @@
 
     $scope.history = [];
 
-    $scope.hist_insert = function(statement){
-      history.push({text: statement, remove: function(){
-        // how do we get ahold of this history entry?
-        entry = magic();
-        // somehow prompt user "do you want to rollback this statement, and all
-        // subsequent statements?", if yes: remove however many entries from
-        // both history and relations.
-      }});
-    }
-
     $scope.error = function(){
       document.write('<h1>SOMETHING WENT BAD WRONG.</h1>');
     }
+
+    var getNextName = function(){
+      //{{{
+      var counter = 0;
+      getNextName = function(){
+        counter += 1;
+        return 'Relation' + counter;
+      }
+      return getNextName();
+    }
+    //}}}
 
     $scope.getRelConditions = function(){
       //{{{
@@ -40,7 +41,7 @@
       var index = rel.head.indexOf(attr),
         t = typeof(rel.rows[0][index])
         output = [];
-//      if (t == 'string'){
+        // if (t == 'string'){
         // we need to get that column
         for (var i = 0; i < rel.rows.length; i++){
           var item = rel.rows[i][index];
@@ -49,23 +50,26 @@
           }
         }
         return output.sort();
-//      } else if (t == 'number'){
-//        // need to pull up the ng-numpad thing
-//        return [];
-//      }
+      // } else if (t == 'number'){
+      //   // need to pull up the ng-numpad thing
+      //   return [];
+      // }
     }
     //}}}
 
-    var getNextName = function(){
-      //{{{
-      var counter = 0;
-      getNextName = function(){
-        counter += 1;
-        return 'Relation' + counter;
-      }
-      return getNextName();
+    $scope.hist_insert = function(statement){
+      // {{{
+      var index = $scope.history.length;
+      $scope.history.push({text: statement, remove: function(){
+        entry = $scope.history[index];
+        // somehow prompt user "do you want to rollback this statement, and all
+        // subsequent statements?", if yes: remove however many entries from
+        // both history and relations.
+        console.log(entry.text);
+      }});
+      console.log($scope.history[index].text);
     }
-    //}}}
+    // }}}
 
     $scope.Select = function(){
       // {{{
@@ -144,7 +148,7 @@
           // display it
           $scope.relation = r_out;
           // add this statement to the history
-          $scope.history.push(statement);
+          $scope.hist_insert(statement);
           // and reset the action
           $scope.action = $scope.Default();
         }
@@ -227,7 +231,7 @@
 
           $scope.relations[r_out.name] = r_out;
           $scope.relation = r_out;
-          $scope.history.push(statement);
+          $scope.hist_insert(statement);
           $scope.action = $scope.Default();
         }
         //}}}
@@ -360,7 +364,7 @@
 
           $scope.relation = r_out;
           $scope.relations[r_out.name] = r_out;
-          $scope.history.push(statement);
+          $scope.hist_insert(statement);
           $scope.action = $scope.Default();
         }
         //}}}
@@ -381,8 +385,8 @@
 
     // All our data
     $scope.relations = {
+      //{{{
       students: {
-        //{{{
         name: 'Students',
         display_name: 'Students',
         head: ['SName', 'Age', 'Major', 'ID', 'Sex', 'Address', 'City', 'State'],
@@ -409,9 +413,7 @@
           ['Walker R.',     21, 'CS',   55555520, 'M', '9 Iron Drive',      'Monroe',   'LA']
         ]
       },
-      //}}}
       faculty: {
-        //{{{
         name: 'Faculty',
         display_name: 'Faculty',
         head: ['FName', 'Dept', 'Office', 'Phone', 'SSN', 'Salary'],
@@ -425,9 +427,7 @@
           ['Johnson R.',    'English',    'GTM 111',  2576666, 777889999, 40000]
         ]
       },
-      //}}}
       courses: {
-        //{{{
         name: 'Courses',
         display_name: 'Courses',
         head: ['FName', 'SEQ_NO', 'Course', 'Quarter', 'Year', 'Credits'],
@@ -447,9 +447,7 @@
           ['Oneal M.B.',    100013, 'CS 100',   'WINTER', 2007, 3]
         ]
       },
-      //}}}
       grades: {
-        //{{{
         name: 'Grades',
         display_name: 'Grades',
         head: ['ID', 'SEQ_NO', 'Grade'],
@@ -532,8 +530,8 @@
           [55555519, 100011, 'B']
         ]
       },
-      //}}}
     }
+    // }}}
   });
 })();
 
