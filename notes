@@ -1,17 +1,5 @@
 Notes
 =====
-- The dropdown links in (first the select relation and then) all relations
-   need to fetch appropriate values to pick from.
-- The accept and cancel buttons still need to be wired up
-- The 'active' state in the list-buttons is being weird...
-- *Multi-line editor?*
-  - to work w/ the walkthrough
-  - all the statements at once
-  - **this would probably be more difficult than we want to deal with**
-  - **more of a history view?**
-    - b/c that's kinda what i'm doing, lol
-
-* * *
 
 For Mike:
 ---------
@@ -31,12 +19,7 @@ For Mike:
 
 - don't want 15 instances of the same lab
 - need a way to 'link' things, per se
-
-* * *
-
-#### the javascript lab
-- infinite loop checker
-- query user and such
+  - it looked like burt had something like this maybe?
 
 * * *
 
@@ -47,12 +30,6 @@ For Mike:
 
 * * *
 
-### Work in progress
-so i'm working on the editor bit again. going to try to set up a history-like
-panel. right now working on getting the buttons to stick to the bottom of the
-div. didn't really find a way to do it in bootstrap, resorting to pure css.
-it's pretty dumb, but it works for now.
-
 ### TODO
 - i think the relationship name needs to be in the statement.
   - would be simple enough to add a "name" field in each action
@@ -60,5 +37,10 @@ it's pretty dumb, but it works for now.
 - need a fixed-width font for the statements
 - need to add quotes around text entries
   - do we also need them around tables? we'll check into that.
-
 - *undo?*
+
+* * *
+
+- i'm betting we can take the 'remove' function out of the hist object array
+  and put a single one in the $scope. we'd just need some way to get that index
+  into it.

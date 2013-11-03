@@ -1,18 +1,18 @@
-;(function(){
+;(function() {
   var app = angular.module('DatabaseApp', ['ui.bootstrap'])
 
-  app.controller('DatabaseController', function($scope){
+  app.controller('DatabaseController', function($scope) {
 
     $scope.history = [];
 
-    $scope.error = function(){
+    $scope.error = function() {
       document.write('<h1>SOMETHING WENT BAD WRONG.</h1>');
     }
 
-    var getNextName = function(){
+    var getNextName = function() {
       // {{{
       var counter = 0;
-      getNextName = function(){
+      getNextName = function() {
         counter += 1;
         return 'Relation' + counter;
       }
@@ -20,7 +20,7 @@
     }
     // }}}
 
-    $scope.getRelConditions = function(){
+    $scope.getRelConditions = function() {
       // {{{
       return [
         '<',
@@ -33,87 +33,89 @@
     };
     // }}}
 
-    $scope.getConditionValues = function(rel, attr){
+    $scope.getConditionValues = function(rel, attr) {
       // {{{
-      if (!rel.head){
+      if (!rel.head) {
         return;
       }
       var index = rel.head.indexOf(attr),
         t = typeof(rel.rows[0][index])
         output = [];
-        // if (t == 'string'){
+        // if (t == 'string') {
         // we need to get that column
-        for (var i = 0; i < rel.rows.length; i++){
+        for (var i = 0; i < rel.rows.length; i++) {
           var item = rel.rows[i][index];
-          if (output.indexOf(item) == -1){
+          if (output.indexOf(item) == -1) {
             output.push(item);
           }
         }
         return output.sort();
-      // } else if (t == 'number'){
+      // } else if (t == 'number') {
       //   // need to pull up the ng-numpad thing
       //   return [];
       // }
     }
     // }}}
 
-    $scope.hist_insert = function(rel){
+    $scope.hist_insert = function(rel) {
       // {{{
       var index = $scope.history.length;
-      $scope.history.push({relation: rel, remove: function(){
+      $scope.history.push({relation: rel, remove: function() {
         entry = $scope.history[index];
         // somehow prompt user "do you want to rollback this statement, and all
         // subsequent statements?", if yes: remove however many entries from
         // both history and relations.
 
         // right now, assuming yes.
-        for (var i = $scope.history.length - 1; i >= index; i--){
-          console.log('deleting');
-          console.log($scope.history[i]);
-          console.log($scope.relations[$scope.history[i].relation.name]);
+        for (var i = $scope.history.length - 1; i >= index; i--) {
+          // console.log('deleting');
+          // console.log($scope.history[i]);
+          // console.log($scope.relations[$scope.history[i].relation.name]);
           delete $scope.relations[$scope.history[i].relation.name];
           $scope.history.pop();
         }
-        $scope.relation = $scope.history[$scope.history.length - 1].relation;
+        if ($scope.history.length != 0) {
+          $scope.relation = $scope.history[$scope.history.length - 1].relation;
+        }
       }});
       console.log($scope.history[index].relation.statement);
     }
     // }}}
 
-    $scope.Select = function(){
+    $scope.Select = function() {
       // {{{
-      return new function(){
+      return new function() {
         // {{{
         this.name = 'Select';
         this.page = 'partial/select.html';
         this.relation = {name: '[relation]'};
 
-        this.setDefaults = function(){
+        this.setDefaults = function() {
           this.attribute = '[attribute]';
           this.condition = '[condition]';
           this.value = '[value]';
         }
 
-        this.setRelation = function(rel){
+        this.setRelation = function(rel) {
           this.setDefaults();
           this.relation = rel;
         }
 
-        this.setAttribute = function(attr){
+        this.setAttribute = function(attr) {
           this.setDefaults();
           this.attribute = attr;
         }
 
-        this.setCondition = function(comp){
+        this.setCondition = function(comp) {
           this.condition = comp;
         }
 
-        this.setValue = function(val){
+        this.setValue = function(val) {
           this.value = val;
         }
         // }}}
 
-        this.accept = function(){
+        this.accept = function() {
           // {{{
 
           // declare some stuff
@@ -131,23 +133,23 @@
 
           // pull out our comparison operator
           var filter;
-          if (this.condition == '<'){
-            filter = function(val1, val2){ return (val1 < val2); }
-          } else if (this.condition == '<='){
-            filter = function(val1, val2){ return (val1 <= val2); }
-          } else if (this.condition == '>'){
-            filter = function(val1, val2){ return (val1 > val2); }
-          } else if (this.condition == '>='){
-            filter = function(val1, val2){ return (val1 >= val2); }
-          } else if (this.condition == '=='){
-            filter = function(val1, val2){ return (val1 == val2); }
-          } else if (this.condition == '!='){
-            filter = function(val1, val2){ return (val1 != val2); }
+          if (this.condition == '<') {
+            filter = function(val1, val2) { return (val1 < val2); }
+          } else if (this.condition == '<=') {
+            filter = function(val1, val2) { return (val1 <= val2); }
+          } else if (this.condition == '>') {
+            filter = function(val1, val2) { return (val1 > val2); }
+          } else if (this.condition == '>=') {
+            filter = function(val1, val2) { return (val1 >= val2); }
+          } else if (this.condition == '==') {
+            filter = function(val1, val2) { return (val1 == val2); }
+          } else if (this.condition == '!=') {
+            filter = function(val1, val2) { return (val1 != val2); }
           }
 
           // and filter it across our relation
-          for (var i = 0; i < rows.length; i++){
-            if (filter(rows[i][index], this.value)){
+          for (var i = 0; i < rows.length; i++) {
+            if (filter(rows[i][index], this.value)) {
               r_out.rows.push(rows[i]);
             }
           }
@@ -168,39 +170,39 @@
     }
     // }}}
 
-    $scope.Project = function(){
+    $scope.Project = function() {
       // {{{
-      return new function(){
+      return new function() {
         // {{{
         this.name = 'Project';
         this.page = 'partial/project.html';
         this.relation = {name: '[relation]'};
         this.dropdown = '[attribute]'
 
-        this.setDefaults = function(){
+        this.setDefaults = function() {
           this.attributes = [];
           this.available = [];
         }
 
-        this.setRelation = function(rel){
+        this.setRelation = function(rel) {
           this.setDefaults();
           this.relation = rel;
           this.available = rel.head.slice();      // makes a copy
         }
 
-        this.addAttribute = function(attr){
+        this.addAttribute = function(attr) {
           this.attributes.push(attr);
           var index = this.available.indexOf(attr);
-          if (index != -1){
+          if (index != -1) {
             this.available.splice(index, 1);
           } else {
             $scope.error();
           }
         }
 
-        this.removeAttribute = function(attr){
+        this.removeAttribute = function(attr) {
           var index = this.attributes.indexOf(attr);
-          if (index != -1){
+          if (index != -1) {
             this.attributes.splice(index, 1);
           } else {
             $scope.error();
@@ -209,7 +211,7 @@
         }
         // }}}
 
-        this.accept = function(){
+        this.accept = function() {
           // {{{
 
           // declare some stuff
@@ -226,13 +228,13 @@
               };
 
           // grab the indices of the attributes we're projecting
-          for (var i = 0; i < this.attributes.length; i++){
+          for (var i = 0; i < this.attributes.length; i++) {
             indices.push(head.indexOf(this.attributes[i]));
           }
 
-          for (var i = 0; i < rows.length; i++){
+          for (var i = 0; i < rows.length; i++) {
             var row = [];
-            for (var j = 0; j < indices.length; j++){
+            for (var j = 0; j < indices.length; j++) {
               row.push(rows[i][indices[j]]);
             }
             r_out.rows.push(row);
@@ -250,9 +252,9 @@
     }
     // }}}
 
-    $scope.Join = function(){
+    $scope.Join = function() {
       // {{{
-      return new function(){
+      return new function() {
         // {{{
         this.name = 'Join';
         this.page = 'partial/join.html';
@@ -261,8 +263,8 @@
         this.attribute = '[attribute]';
         this.available = [];
 
-        this.getAvailable = function(){
-          if (!this.relation1.head || !this.relation2.head){
+        this.getAvailable = function() {
+          if (!this.relation1.head || !this.relation2.head) {
             return;
           }
 
@@ -273,10 +275,10 @@
           list1.sort();
           list2.sort();
 
-          while (list1.length != 0 && list2.length != 0){
-            if (list1[0] < list2[0]){
+          while (list1.length != 0 && list2.length != 0) {
+            if (list1[0] < list2[0]) {
               list1.splice(0, 1);
-            } else if (list1[0] > list2[0]){
+            } else if (list1[0] > list2[0]) {
               list2.splice(0, 1);
             } else {
               listOut.push(list1[0]);
@@ -288,30 +290,30 @@
           this.available = listOut;
         }
 
-        this.getShared = function(){
+        this.getShared = function() {
           return this.available;
         }
 
-        this.setRelation1 = function(rel){
+        this.setRelation1 = function(rel) {
           this.attribute = '[attribute]';
           this.relation1 = rel;
           this.getAvailable();
         }
 
-        this.setRelation2 = function(rel){
+        this.setRelation2 = function(rel) {
           this.attribute = '[attribute]';
           this.relation2 = rel;
           this.getAvailable();
         }
 
-        this.setAttribute = function(attr){
+        this.setAttribute = function(attr) {
           this.attribute = attr;
         }
         // }}}
 
         // Fired when Join is active and accept is pressed
         // joins two tables, and puts the result in $scope.relations
-        this.accept = function(){
+        this.accept = function() {
           // {{{
 
           // the attributes from both input tables
@@ -336,8 +338,8 @@
               }
 
           // for each attr in 'both', if not in the resultant head, add it
-          for (var i = 0; i < both.length; i++){
-            if (r_out.head.indexOf(both[i]) == -1){
+          for (var i = 0; i < both.length; i++) {
+            if (r_out.head.indexOf(both[i]) == -1) {
               r_out.head.push(both[i]);
             } else {
               ignore.push(i);
@@ -345,8 +347,8 @@
           }
 
           // for each combination of tuples:
-          for (var i = 0; i < relA.rows.length; i++){
-            for (var j = 0; j < relB.rows.length; j++){
+          for (var i = 0; i < relA.rows.length; i++) {
+            for (var j = 0; j < relB.rows.length; j++) {
               // if the entries for our attribute-in-question are the same:
               if (relA.rows[i][indexA] == relB.rows[j][indexB]) {
                 console.log(relA.rows[i][indexA], relB.rows[j][indexB]);
@@ -355,13 +357,13 @@
                 // of them together (keeps us in sync w/ 'both')
                 var p = 0,
                     row = [];
-                for (var k = 0; k < relA.rows[i].length; k++, p++){
-                  if (ignore.indexOf(p) == -1){
+                for (var k = 0; k < relA.rows[i].length; k++, p++) {
+                  if (ignore.indexOf(p) == -1) {
                     row.push(relA.rows[i][k]);
                   }
                 }
-                for (var k = 0; k < relB.rows[j].length; k++, p++){
-                  if (ignore.indexOf(p) == -1){
+                for (var k = 0; k < relB.rows[j].length; k++, p++) {
+                  if (ignore.indexOf(p) == -1) {
                     row.push(relB.rows[j][k]);
                   }
                 }
@@ -380,9 +382,9 @@
     }
     // }}}
 
-    $scope.Default = function(){
+    $scope.Default = function() {
       // {{{
-      return new function(){
+      return new function() {
         this.name = 'Action';
         this.page = 'partial/default.html';
       }
