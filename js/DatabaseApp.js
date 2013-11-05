@@ -74,7 +74,9 @@
           delete $scope.relations[$scope.history[i].relation.name];
           $scope.history.pop();
         }
-        if ($scope.history.length != 0) {
+        if ($scope.history.length == 0) {
+          $scope.relation = null;
+        } else {
           $scope.relation = $scope.history[$scope.history.length - 1].relation;
         }
       }});
