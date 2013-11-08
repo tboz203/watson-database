@@ -14,16 +14,19 @@
     var statements = [
       // {{{
       { action: 'join',
+        name: 'Faculty_and_Courses',
         relation1: 'faculty',
         relation2: 'courses',
         attribute: 'FName'},
       { action: 'select',
-        relation: 'Relation1',
+        name: 'Oneal_Courses',
+        relation: 'Faculty_and_Courses',
         attribute: 'FName',
         condition: '==',
         value: 'Oneal M.B.'},
       { action: 'project',
-        relation: 'Relation2',
+        name: 'Course_Quarter_SEQ_NO',
+        relation: 'Oneal_Courses',
         attributes: ['Course', 'Quarter', 'SEQ_NO']}
     ];
     // }}}
@@ -83,7 +86,7 @@
 
         // declare some stuff
         var rel = $scope.relations[stmt.relation],
-            r_name = getNextName(),
+            r_name = stmt.name,
             index = rel.head.indexOf(stmt.attribute),
             r_out = {
               name: r_name,
@@ -131,7 +134,7 @@
 
         // declare some stuff
         var rel = $scope.relations[stmt.relation],
-            r_name = getNextName(),
+            r_name = stmt.name,
             indices = [],
             r_out = {
               name: r_name,
@@ -164,7 +167,7 @@
         // {{{
 
         // a name for our resulting relation
-        var r_name = getNextName(),
+        var r_name = stmt.name,
             // our input relations
             relA = $scope.relations[stmt.relation1],
             relB = $scope.relations[stmt.relation2],
@@ -178,8 +181,8 @@
             // the relation itself
             r_out = {
               name: r_name,
-              statement: r_name + ' <- JOIN ' + stmt.relation1.name + ' AND ' +
-                  stmt.relation2.name + ' OVER ' + stmt.attribute + ';',
+              statement: r_name + ' <- JOIN ' + relA.name + ' AND ' +
+                  relB.name + ' OVER ' + stmt.attribute + ';',
               head: [],
               rows: []
             }
