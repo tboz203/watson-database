@@ -26,23 +26,16 @@
                         <div id='history' class='panel-body'>
                             <div ng-repeat='item in history'>
                                 <span ng-bind='item.relation.statement'></span>
-                                <span class='mybutton pull-right text-danger glyphicon glyphicon-remove-sign' ng-click='item.remove()'></span>
+                                <!-- <span class='mybutton pull-right text-danger glyphicon glyphicon-remove-sign' ng-click='item.remove()'></span> -->
                             </div>
                         </div>
-                        <div id='action' ng-include='action.page' class='panel-footer'></div>
+                        <!-- <div id='action' ng-include='action.page' class='panel-footer'></div> -->
+                        <div id='action' class='panel-footer'></div>
                     </div>
                 </div>
                 <div id='editor_button_group' class='col-lg-2 btn-group-vertical'>
-                    <div class='btn-group'>
-                        <button type='button' class='btn btn-primary dropdown-toggle'><span ng-bind='action.name'></span> <span class='caret'></span></button>
-                        <ul class='dropdown-menu'>
-                            <li><a ng-click='action = Select()'>Select</a></li>
-                            <li><a ng-click='action = Project()'>Project</a></li>
-                            <li><a ng-click='action = Join()'>Join</a></li>
-                        </ul>
-                    </div>
-                    <button type='button' class='btn btn-success' ng-click='action.accept()'>Accept</button>
-                    <button type='button' class='btn btn-danger' ng-click='action = Default()'>Cancel</button>
+                    <button class='btn btn-default' ng-click='previous()'>Previous <span class='glyphicon glyphicon-arrow-up'></span></button>
+                    <button class='btn btn-primary' ng-click='next()'>Next <span class='glyphicon glyphicon-arrow-down'></span></button>
                 </div>
             </div>
             <hr>
