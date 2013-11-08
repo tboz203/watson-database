@@ -67,16 +67,20 @@
 
     var stmt_index = 0;
     // {{{
-    $scope.next = function(){
-      stmt = statements[stmt_index];   // grab our statement
-      stmt_index += 1;                // it's the pythonista in me. what can i say.
-      actions[stmt.action](stmt);     // call the passed statement
+    $scope.next = function() {
+      if (stmt_index < statements.length) {
+        stmt = statements[stmt_index];   // grab our statement
+        stmt_index += 1;                // it's the pythonista in me. what can i say.
+        actions[stmt.action](stmt);     // call the passed statement
+      }
     }
 
-    $scope.previous = function(){
-      item = $scope.history[$scope.history.length - 1];
-      item.remove();
-      stmt_index -= 1;
+    $scope.previous = function() {
+      if (stmt_index > 0) {
+        item = $scope.history[$scope.history.length - 1];
+        item.remove();
+        stmt_index -= 1;
+      }
     }
     // }}}
 
