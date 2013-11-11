@@ -4,15 +4,15 @@
   app.controller('DatabaseController', function($scope) {
 
     $scope.relations = {};
-
     $scope.history = [];
+    var hist_index = 0;
 
     $scope.error = function() {
-      document.write('<h1>SOMETHING WENT BAD WRONG.</h1>');
+      document.write('<h1>SOMETHING is WRONG.</h1>');
+      throw new Error("something went wrong...");
     }
 
-    var statements = [
-      // {{{
+    var statements = [        // {{{
       { action: 'join',
         name: 'Faculty_and_Courses',
         relation1: 'faculty',
@@ -28,65 +28,57 @@
         name: 'Course_Quarter_SEQ_NO',
         relation: 'Oneal_Courses',
         attributes: ['Course', 'Quarter', 'SEQ_NO']}
-    ];
-    // }}}
+    ];        // }}}
 
-    var getNextName = function() {
-      // {{{
-      var counter = 0;
-      getNextName = function() {
-        counter += 1;
-        return 'Relation' + counter;
+    var hist_insert = function(stmt){       // {{{
+
+      switch (stmt.action){
+        case 'select':
+          stmt.text = stmt.name + ' <- SELECT FROM ' + stmt.relation +
+            ' WHERE ' + stmt.attribute + ' ' + stmt.condition + ' ' +
+            stmt.value + ';';
+          break;
+        case 'project':
+          stmt.text = stmt.name + ' <- PROJECT ' + stmt.attributes.join(', ') +
+            ' FROM ' + stmt.relation + ';';
+          break;
+        case 'join':
+          stmt.text = stmt.name + ' <- JOIN ' + stmt.relation1 + ' AND ' +
+            stmt.relation2 + ' OVER ' + stmt.attribute + ';';
+          break;
+        default:
+          $scope.error();
+          break;
       }
-      return getNextName();
-    }
-    // }}}
+      $scope.history.push({stmt: stmt, processed: false});
+    }       // }}}
 
-    var hist_insert = function(rel) {
-      // {{{
-      var index = $scope.history.length;
-      $scope.history.push({relation: rel, remove: function() {
-        entry = $scope.history[index];
-        // somehow prompt user "do you want to rollback this statement, and all
-        // subsequent statements?", if yes: remove however many entries from
-        // both history and relations.
+    $scope.next = function(){       // {{{
+      if (hist_index < $scope.history.length) {
+        item = $scope.history[hist_index];
+        hist_index += 1;
+        actions[item.stmt.action](item.stmt);
+        item.processed = true;
+        $scope.active = item.stmt.text;
+      }
+    }       // }}}
 
-        // right now, assuming yes.
-        for (var i = $scope.history.length - 1; i >= index; i--) {
-          delete $scope.relations[$scope.history[i].relation.name];
-          $scope.history.pop();
-        }
-        if ($scope.history.length == 0) {
-          $scope.relation = null;
+    $scope.previous = function() {        // {{{
+      if (hist_index > 0) {
+        hist_index -= 1;
+        item = $scope.history[hist_index];
+        item.processed = false;
+        delete $scope.relations[item.stmt.name];
+        if (hist_index > 0) {
+          $scope.active = $scope.history[hist_index - 1].stmt.text;
         } else {
-          $scope.relation = $scope.history[$scope.history.length - 1].relation;
+          $scope.active = null;
         }
-      }});
-    }
-    // }}}
-
-    var stmt_index = 0;
-    // {{{
-    $scope.next = function() {
-      if (stmt_index < statements.length) {
-        stmt = statements[stmt_index];   // grab our statement
-        stmt_index += 1;                // it's the pythonista in me. what can i say.
-        actions[stmt.action](stmt);     // call the passed statement
       }
-    }
-
-    $scope.previous = function() {
-      if (stmt_index > 0) {
-        item = $scope.history[$scope.history.length - 1];
-        item.remove();
-        stmt_index -= 1;
-      }
-    }
-    // }}}
+    }       // }}}
 
     var actions = {
-      select: function(stmt) {
-        // {{{
+      select: function(stmt) {        // {{{
 
         // declare some stuff
         var rel = $scope.relations[stmt.relation],
@@ -128,13 +120,9 @@
         $scope.relations[r_out.name] = r_out;
         // display it
         $scope.relation = r_out;
-        // add this statement to the history
-        hist_insert(r_out);
-      },
-      // }}}
+      },        // }}}
 
-      project: function(stmt) {
-        // {{{
+      project: function(stmt) {       // {{{
 
         // declare some stuff
         var rel = $scope.relations[stmt.relation],
@@ -163,12 +151,9 @@
 
         $scope.relations[r_out.name] = r_out;
         $scope.relation = r_out;
-        hist_insert(r_out);
-      },
-      // }}}
+      },        // }}}
 
-      join: function(stmt) {
-        // {{{
+      join: function(stmt) {        // {{{
 
         // a name for our resulting relation
         var r_name = stmt.name,
@@ -227,13 +212,10 @@
 
         $scope.relation = r_out;
         $scope.relations[r_out.name] = r_out;
-        hist_insert(r_out);
-      }
-      // }}}
+      }         // }}}
     }
 
-    $scope.relations = {
-      // {{{
+    $scope.relations = {        // {{{
       students: {
         name: 'Students',
         display_name: 'Students',
@@ -378,8 +360,11 @@
           [55555519, 100011, 'B']
         ]
       },
+    }         // }}}
+
+    for (var i = 0; i < statements.length; i++){
+      hist_insert(statements[i]);
     }
-    // }}}
 
   });
 })();

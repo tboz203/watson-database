@@ -14,10 +14,10 @@
     cursor: pointer;
 }
 
-/* make the statement editor section stay the same size */
-.panel > .panel-footer {
-  min-height: 41px;
-}
+/* /1* make the statement editor section stay the same size *1/ */
+/* .panel > .panel-footer { */
+/*   min-height: 41px; */
+/* } */
 
 /* By default, buttons inside button groups inside vertical button groups
  * don't resize to their column. Not sure why? */
@@ -47,6 +47,7 @@ hr {
   /* position: absolute; */
   /* left: 195px; */
   bottom: 0;
+  min-height: 88px;
 }
 
 .btn-group-vertical {
@@ -64,6 +65,15 @@ hr {
 .mybutton {
   padding-right: 15px;
   cursor: pointer;
+}
+
+.processed {
+  color: #999999;
+}
+
+.active {
+  color: black;
+  font-weight: bold;
 }
 
 /* ======================================================================= */

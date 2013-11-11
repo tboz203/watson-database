@@ -25,12 +25,12 @@
                     <div id='editor_panel' class='panel panel-default'>
                         <div id='history' class='panel-body'>
                             <div ng-repeat='item in history'>
-                                <span ng-bind='item.relation.statement'></span>
+                                <span ng-class='{processed: !item.processed, active: (item.stmt.text == active)}'  ng-bind='item.stmt.text'></span>
                                 <!-- <span class='mybutton pull-right text-danger glyphicon glyphicon-remove-sign' ng-click='item.remove()'></span> -->
+                                <span class='pull-right glyphicon glyphicon-arrow-left' ng-class='{hidden: !(item.stmt.text == active)}'></span>
                             </div>
                         </div>
                         <!-- <div id='action' ng-include='action.page' class='panel-footer'></div> -->
-                        <div id='action' class='panel-footer'></div>
                     </div>
                 </div>
                 <div id='editor_button_group' class='col-lg-2 btn-group-vertical'>
