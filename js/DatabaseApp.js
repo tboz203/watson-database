@@ -70,9 +70,12 @@
         item.processed = false;
         delete $scope.relations[item.stmt.name];
         if (hist_index > 0) {
-          $scope.active = $scope.history[hist_index - 1].stmt.text;
+          item = $scope.history[hist_index - 1];
+          $scope.active = item.stmt.text;
+          $scope.relation = $scope.relations[item.stmt.name];
         } else {
           $scope.active = null;
+          $scope.relation = null;
         }
       }
     }       // }}}

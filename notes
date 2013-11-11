@@ -11,7 +11,7 @@ For Mike:
 * * *
 
 - "play with this" button
-- reset button
+- `reset` button?
 - single stepping through statements
 - "How do i make this come alive?"
 
@@ -21,9 +21,20 @@ For Mike:
 - need a way to 'link' things, per se
   - it looked like burt had something like this maybe?
 
-* * *
-
-#### update:
+update:
+-------
 - want to make a not-full-editor version
   - branch it in git
   - take out / dumb down the interactive bits (?)
+
+2013-11-11
+----------
+- final notes
+- there's a nice walkthrough version now.
+  - need to work on ease of modification
+  - that separation of data and logic thing again.
+- *`project` needs to be changed*
+  - the output order doesn't depend on the order of the statement
+
+NEED TO WRITE A PAPER
+=====================
