@@ -1,14 +1,19 @@
 ;(function() {
+  // make our app object
   var app = angular.module('DatabaseApp', ['ui.bootstrap'])
 
+  // give our app a controller
   app.controller('DatabaseController', function($scope) {
 
+    // a list to hold the statement history
     $scope.history = [];
 
+    // a generic "error" function
     $scope.error = function() {
       document.write('<h1>SOMETHING WENT BAD WRONG.</h1>');
     }
 
+    // supply generic names for our created relations
     var getNextName = function() {
       // {{{
       var counter = 0;
@@ -20,6 +25,8 @@
     }
     // }}}
 
+    // supply the possible comparison conditions
+    // needs to be removed
     $scope.getRelConditions = function() {
       // {{{
       return [
@@ -33,6 +40,7 @@
     };
     // }}}
 
+    // supply possible things to compare against
     $scope.getConditionValues = function(rel, attr) {
       // {{{
       if (!rel.head) {
@@ -57,6 +65,8 @@
     }
     // }}}
 
+    // insert a statement into the history
+    // shouldn't this be an internal thing?
     $scope.hist_insert = function(rel) {
       // {{{
       var index = $scope.history.length;
@@ -84,6 +94,7 @@
     }
     // }}}
 
+    // return an object to handle a 'select' action
     $scope.Select = function() {
       // {{{
       return new function() {
@@ -172,6 +183,7 @@
     }
     // }}}
 
+    // return an object to handle a 'project' action
     $scope.Project = function() {
       // {{{
       return new function() {
@@ -254,6 +266,7 @@
     }
     // }}}
 
+    // return an object to handle a 'join' action
     $scope.Join = function() {
       // {{{
       return new function() {
@@ -384,6 +397,7 @@
     }
     // }}}
 
+    // return an object to placehold for an action
     $scope.Default = function() {
       // {{{
       return new function() {
@@ -393,9 +407,11 @@
     }
     // }}}
 
+    // set the first action to be 'default'
     $scope.action = $scope.Default();
 
-    // All our data
+    // All our initial data
+    // this needs to be able to be changed (and verified?) somehow
     $scope.relations = {
       // {{{
       students: {

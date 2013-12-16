@@ -8,27 +8,27 @@ For Mike:
   - either a tool for mike, or not
   - separation of data and logic
 
-* * *
+---
 
 - "play with this" button
 - reset button
 - single stepping through statements
 - "How do i make this come alive?"
 
-* * *
+---
 
 - don't want 15 instances of the same lab
 - need a way to 'link' things, per se
   - it looked like burt had something like this maybe?
 
-* * *
+---
 
 #### update:
 - want to make a not-full-editor version
   - branch it in git
   - take out / dumb down the interactive bits (?)
 
-* * *
+---
 
 ### TODO
 - i think the relationship name needs to be in the statement.
@@ -39,7 +39,7 @@ For Mike:
   - do we also need them around tables? we'll check into that.
 - *undo?*
 
-* * *
+---
 
 - i'm betting we can take the 'remove' function out of the hist object array
   and put a single one in the $scope. we'd just need some way to get that index
