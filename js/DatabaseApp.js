@@ -66,8 +66,7 @@
     // }}}
 
     // insert a statement into the history
-    // shouldn't this be an internal thing?
-    $scope.hist_insert = function(rel) {
+    var hist_insert = function(rel) {
       // {{{
       var index = $scope.history.length;
       $scope.history.push({relation: rel, remove: function() {
@@ -172,7 +171,7 @@
           // display it
           $scope.relation = r_out;
           // add this statement to the history
-          $scope.hist_insert(r_out);
+          hist_insert(r_out);
           // and reset the action
           $scope.action = $scope.Default();
         }
@@ -256,7 +255,7 @@
 
           $scope.relations[r_out.name] = r_out;
           $scope.relation = r_out;
-          $scope.hist_insert(r_out);
+          hist_insert(r_out);
           $scope.action = $scope.Default();
         }
         // }}}
@@ -389,7 +388,7 @@
 
           $scope.relation = r_out;
           $scope.relations[r_out.name] = r_out;
-          $scope.hist_insert(r_out);
+          hist_insert(r_out);
           $scope.action = $scope.Default();
         }
         // }}}
