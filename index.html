@@ -13,15 +13,15 @@
     <hr>
     <!-- Relation Editor View -->
     <div id='row_div' class='row'>
-        <div id='list_group_div' class='col-lg-3'>
+        <div id='list_group_div' class='col-lg-3 col-md-3'>
             <div class='list-group list-group-sm'>
                 <!-- '$parent' required because the ng-repeat creates a new inner scope -->
                 <li class='btn btn-default list-group-item list-group-btn' ng-repeat='rel in relations' ng-model='$parent.relation' btn-radio='rel' ng-bind="rel.name"></li>
             </div>
         </div>
-        <div class='col-lg-9'>
+        <div class='col-lg-9 col-md-9'>
             <div id='inner_row' class='row'>
-                <div id='statement_div' class='col-lg-10'>
+                <div id='statement_div' class='col-lg-10 col-md-10'>
                     <div id='editor_panel' class='panel panel-default'>
                         <div id='history' class='panel-body'>
                             <div ng-repeat='item in history'>
@@ -33,7 +33,7 @@
                         <!-- <div id='action' ng-include='action.page' class='panel-footer'></div> -->
                     </div>
                 </div>
-                <div id='editor_button_group' class='col-lg-2 btn-group-vertical'>
+                <div id='editor_button_group' class='col-lg-2 col-md-2 btn-group-vertical'>
                     <button class='btn btn-default' ng-click='previous()'>Previous <span class='glyphicon glyphicon-arrow-up'></span></button>
                     <button class='btn btn-primary' ng-click='next()'>Next <span class='glyphicon glyphicon-arrow-down'></span></button>
                 </div>
