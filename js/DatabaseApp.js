@@ -12,6 +12,7 @@
       throw new Error("something went wrong...");
     }
 
+    // if we ever get `require.js` working, THIS.
     var statements = [        // {{{
       { action: 'join',
         name: 'Faculty_and_Courses',
@@ -54,28 +55,19 @@
     }       // }}}
 
     $scope.next = function(){       // {{{
+      console.log(hist_index);
       if (hist_index < $scope.history.length) {
         item = $scope.history[hist_index];
         hist_index += 1;
         actions[item.stmt.action](item.stmt);
         item.processed = true;
         $scope.active = item.stmt.text;
-      }
-    }       // }}}
-
-    $scope.previous = function() {        // {{{
-      if (hist_index > 0) {
-        hist_index -= 1;
-        item = $scope.history[hist_index];
-        item.processed = false;
-        delete $scope.relations[item.stmt.name];
-        if (hist_index > 0) {
-          item = $scope.history[hist_index - 1];
-          $scope.active = item.stmt.text;
-          $scope.relation = $scope.relations[item.stmt.name];
-        } else {
-          $scope.active = null;
-          $scope.relation = null;
+      } else {
+        hist_index = 0;
+        $scope.active = null;
+        $scope.relation = null;
+        for (var i=0; i < $scope.history.length; i++) {
+          $scope.history[i].processed = false;
         }
       }
     }       // }}}
@@ -218,6 +210,8 @@
       }         // }}}
     }
 
+    // this very much needs to be in a separate data file. ought to be
+    // possible w/ some manner of JSON thingy. idk. needs moar research.
     $scope.relations = {        // {{{
       students: {
         name: 'Students',
