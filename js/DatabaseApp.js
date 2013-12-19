@@ -14,21 +14,18 @@
     }
 
     // supply generic names for our created relations
-    var getNextName = function() {
-      // {{{
+    var getNextName = function() { // {{{
       var counter = 0;
       getNextName = function() {
         counter += 1;
         return 'Relation' + counter;
       }
       return getNextName();
-    }
-    // }}}
+    } // }}}
 
     // supply the possible comparison conditions
     // needs to be removed
-    $scope.getRelConditions = function() {
-      // {{{
+    $scope.getRelConditions = function() { // {{{
       return [
         '<',
         '<=',
@@ -37,12 +34,10 @@
         '==',
         '!='
       ];
-    };
-    // }}}
+    }; // }}}
 
     // supply possible things to compare against
-    $scope.getConditionValues = function(rel, attr) {
-      // {{{
+    $scope.getConditionValues = function(rel, attr) { // {{{
       if (!rel.head) {
         return;
       }
@@ -60,26 +55,18 @@
         return output.sort();
       // } else if (t == 'number') {
       //   // need to pull up the ng-numpad thing
+      //   // not even sure if we're still doing that.
       //   return [];
       // }
-    }
-    // }}}
+    } // }}}
 
     // insert a statement into the history
-    var hist_insert = function(rel) {
-      // {{{
+    var hist_insert = function(rel) { // {{{
       var index = $scope.history.length;
       $scope.history.push({relation: rel, remove: function() {
         entry = $scope.history[index];
-        // somehow prompt user "do you want to rollback this statement, and all
-        // subsequent statements?", if yes: remove however many entries from
-        // both history and relations.
 
-        // right now, assuming yes.
         for (var i = $scope.history.length - 1; i >= index; i--) {
-          // console.log('deleting');
-          // console.log($scope.history[i]);
-          // console.log($scope.relations[$scope.history[i].relation.name]);
           delete $scope.relations[$scope.history[i].relation.name];
           $scope.history.pop();
         }
@@ -90,14 +77,11 @@
         }
       }});
       console.log($scope.history[index].relation.statement);
-    }
-    // }}}
+    } // }}}
 
     // return an object to handle a 'select' action
-    $scope.Select = function() {
-      // {{{
-      return new function() {
-        // {{{
+    $scope.Select = function() { // {{{
+      return new function() { // {{{
         this.name = 'Select';
         this.page = 'partial/select.html';
         this.relation = {name: '[relation]'};
@@ -124,12 +108,9 @@
 
         this.setValue = function(val) {
           this.value = val;
-        }
-        // }}}
+        } // }}}
 
-        this.accept = function() {
-          // {{{
-
+        this.accept = function() { // {{{
           // declare some stuff
           var rows = this.relation.rows,
               r_name = getNextName(),
@@ -174,19 +155,15 @@
           hist_insert(r_out);
           // and reset the action
           $scope.action = $scope.Default();
-        }
-        // }}}
+        } // }}}
 
         this.setDefaults();
       }
-    }
-    // }}}
+    } // }}}
 
     // return an object to handle a 'project' action
-    $scope.Project = function() {
-      // {{{
-      return new function() {
-        // {{{
+    $scope.Project = function() { // {{{
+      return new function() { // {{{
         this.name = 'Project';
         this.page = 'partial/project.html';
         this.relation = {name: '[relation]'};
@@ -221,11 +198,9 @@
             $scope.error();
           }
           this.available.push(attr);
-        }
-        // }}}
+        } // }}}
 
-        this.accept = function() {
-          // {{{
+        this.accept = function() { // {{{
 
           // declare some stuff
           var head = this.relation.head,
@@ -257,19 +232,15 @@
           $scope.relation = r_out;
           hist_insert(r_out);
           $scope.action = $scope.Default();
-        }
-        // }}}
+        } // }}}
 
         this.setDefaults();
       }
-    }
-    // }}}
+    } // }}}
 
     // return an object to handle a 'join' action
-    $scope.Join = function() {
-      // {{{
-      return new function() {
-        // {{{
+    $scope.Join = function() { // {{{
+      return new function() { // {{{
         this.name = 'Join';
         this.page = 'partial/join.html';
         this.relation1 = {name: '[relation]'};
@@ -322,14 +293,11 @@
 
         this.setAttribute = function(attr) {
           this.attribute = attr;
-        }
-        // }}}
+        } // }}}
 
         // Fired when Join is active and accept is pressed
         // joins two tables, and puts the result in $scope.relations
-        this.accept = function() {
-          // {{{
-
+        this.accept = function() { // {{{
           // the attributes from both input tables
           var both = this.relation1.head.concat(this.relation2.head),
               // a name for our resulting relation
@@ -390,29 +358,24 @@
           $scope.relations[r_out.name] = r_out;
           hist_insert(r_out);
           $scope.action = $scope.Default();
-        }
-        // }}}
+        } // }}}
       }
-    }
-    // }}}
+    } // }}}
 
     // return an object to placehold for an action
-    $scope.Default = function() {
-      // {{{
+    $scope.Default = function() { // {{{
       return new function() {
         this.name = 'Action';
         this.page = 'partial/default.html';
       }
-    }
-    // }}}
+    } // }}}
 
     // set the first action to be 'default'
     $scope.action = $scope.Default();
 
     // All our initial data
     // this needs to be able to be changed (and verified?) somehow
-    $scope.relations = {
-      // {{{
+    $scope.relations = { // {{{
       students: {
         name: 'Students',
         display_name: 'Students',
@@ -557,8 +520,7 @@
           [55555519, 100011, 'B']
         ]
       },
-    }
-    // }}}
+    } // }}}
   });
 })();
 

@@ -8,36 +8,18 @@ For Mike:
   - either a tool for mike, or not
   - separation of data and logic
 
----
-
-- "play with this" button
-- reset button
-- single stepping through statements
-- "How do i make this come alive?"
-
----
-
-- don't want 15 instances of the same lab
-- need a way to 'link' things, per se
-  - it looked like burt had something like this maybe?
-
----
-
-#### update:
-- want to make a not-full-editor version
-  - branch it in git
-  - take out / dumb down the interactive bits (?)
-
----
-
 ### TODO
 - i think the relationship name needs to be in the statement.
   - would be simple enough to add a "name" field in each action
   - just pass it to the accept bit, tada
-- need a fixed-width font for the statements
+- need a fixed-width font for the statements (maybe?)
 - need to add quotes around text entries
   - do we also need them around tables? we'll check into that.
-- *undo?*
+- want to look into performance issues, but that will come last.
+- the whole 'get smaller with the screen' thing
+- modularization
+  - separating data and logic
+  - being able to do multiple labs w/o copying everything
 
 ---
 
