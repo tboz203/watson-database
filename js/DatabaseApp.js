@@ -1,4 +1,4 @@
-;(function() {
+define(['angular', 'uiBootstrap'], function(angular) {
   // make our app object
   var app = angular.module('DatabaseApp', ['ui.bootstrap'])
 
@@ -521,7 +521,9 @@
         ]
       },
     } // }}}
+    console.log('Database.js, standing by');
   });
-})();
+  return 'this is some return value';
+});
 
 /* vim: set et sw=2 sts=2 fdm=marker : */
