@@ -12,9 +12,9 @@ require.config({
   }
 });
 
-console.log('main.js, standing by');
-
 require(['angular', 'DatabaseApp'], function(angular, app) {
-  console.log('require block, standing by');
   angular.bootstrap(document, ['DatabaseApp']);
+  console.log('require block, standing by');
 });
+
+console.log('main.js, standing by');
