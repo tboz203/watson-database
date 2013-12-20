@@ -1,3 +1,13 @@
 ## Watson Reboot - Database lab
+2013-10-04
 
-not sure what i'm doing yet.
+This project aims to be a more modern revision of the Watson Database lab. As
+opposed to the java platform used in the original Watson implementation, this
+version of Watson is a web application built using javascript and associated
+libraries. 
+
+Some of the open source javascript libraries used in this project are:
+- JQuery
+- Twitter Bootstrap
+- Angular.js
+- UI Bootstrap
