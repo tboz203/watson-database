@@ -34,8 +34,8 @@ define(function(){
     display_name: 'Faculty',
     head: ['FName', 'Dept', 'Office', 'Phone', 'SSN', 'Salary'],
     rows: [
-      ['Kurtz B.L.',   'CompSci',    'NH 224',   2571111, 111223333, 70000],
-      ['Oneal M.B.',   'CompSci',    'NH 247',   2572931, 222334444, 60000],
+      ['Kurtz B.L.',    'CompSci',    'NH 224',   2571111, 111223333, 70000],
+      ['Oneal M.B.',    'CompSci',    'NH 247',   2572931, 222334444, 60000],
       ['Carpenter J.',  'Math',       'GTM 300',  2572222, 333445555, 50000],
       ['Lankford D.',   'Math',       'GTM 311',  2573333, 444556666, 45000],
       ['Tassin M.',     'Business',   'CAB 111',  2574444, 555667777, 65000],

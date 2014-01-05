@@ -1,4 +1,4 @@
-define(['angular', 'relations', 'uiBootstrap'], function(angular, relations) {
+define(['angular', 'relations', 'ui-bootstrap'], function(angular, relations) {
   // make our app object
   var app = angular.module('DatabaseApp', ['ui.bootstrap'])
 
