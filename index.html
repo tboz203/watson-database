@@ -2,7 +2,7 @@
 <!-- declare that our page is going to use angular, and specify the "app" we're pulling from -->
 <html ng-app='DatabaseApp'>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="utf-8">
 <title>Database Lab</title>
 <!-- include our css pages -->
 <link rel='stylesheet' href='lib/css/bootstrap-3.css'>
@@ -41,7 +41,6 @@
         <!-- the buttons -->
         <div id='editor_button_group' class='col-lg-2 col-md-2 btn-group-vertical'>
           <div class='btn-group'>
-          <!-- <div class='dropdown'> -->
             <button type='button' class='btn btn-primary dropdown-toggle'><span ng-bind='action.name'></span> <span class='caret'></span></button>
             <ul class='dropdown-menu'>
               <li><a ng-click='action = Select()'>Select</a></li>

@@ -9,13 +9,17 @@ require.config({
   },
   shim: {
     angular: {exports: 'angular'},
-    'ui-bootstrap': {deps: ['angular']}
+    'ui-bootstrap': {deps: ['angular']},
+    bootstrap: {deps: ['jquery']}
   }
 });
 
-require(['angular', 'DatabaseApp'], function(angular, app) {
-  angular.bootstrap(document, ['DatabaseApp']);
-  console.log('require block, standing by');
+require(['angular', 'DatabaseApp', 'bootstrap'], function(angular, app) {
+  angular.element(document).ready(function() {
+    console.log('entering require block');
+    angular.bootstrap(document, ['DatabaseApp']);
+    console.log('require block, standing by');
+  });
 });
 
 console.log('main.js, standing by');
