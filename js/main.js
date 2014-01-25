@@ -14,10 +14,12 @@ require.config({
   }
 });
 
+window.name = 'NG_DEFER_BOOTSTRAP!';
+
 require(['angular', 'DatabaseApp', 'bootstrap'], function(angular, app) {
   angular.element(document).ready(function() {
     console.log('entering require block');
-    angular.bootstrap(document, ['DatabaseApp']);
+    angular.resumeBootstrap(['DatabaseApp']);
     console.log('require block, standing by');
   });
 });
