@@ -1,31 +1,31 @@
-define(['angular', 'relations', 'ui-bootstrap'], function(angular, relations) {
+define(['angular', 'relations', 'ui-bootstrap'], function (angular, relations) {
   // make our app object
-  var app = angular.module('DatabaseApp', ['ui.bootstrap'])
+  var app = angular.module('DatabaseApp', ['ui.bootstrap']);
 
   // give our app a controller
-  app.controller('DatabaseController', function($scope) {
+  app.controller('DatabaseController', function ($scope) {
 
     // a list to hold the statement history
     $scope.history = [];
 
     // a generic "error" function
-    $scope.error = function() {
+    $scope.error = function () {
       document.write('<h1>SOMETHING WENT BAD WRONG.</h1>');
-    }
+    };
 
     // supply generic names for our created relations
-    var getNextName = function() { // {{{
+    var getNextName = function () { // {{{
       var counter = 0;
-      getNextName = function() {
+      getNextName = function () {
         counter += 1;
         return 'Relation' + counter;
-      }
+      };
       return getNextName();
-    } // }}}
+    }; // }}}
 
     // supply the possible comparison conditions
     // needs to be removed
-    $scope.getRelConditions = function() { // {{{
+    $scope.getRelConditions = function () { // {{{
       return [
         '<',
         '<=',
@@ -37,12 +37,12 @@ define(['angular', 'relations', 'ui-bootstrap'], function(angular, relations) {
     }; // }}}
 
     // supply possible things to compare against
-    $scope.getConditionValues = function(rel, attr) { // {{{
+    $scope.getConditionValues = function (rel, attr) { // {{{
       if (!rel.head) {
         return;
       }
       var index = rel.head.indexOf(attr),
-        t = typeof(rel.rows[0][index])
+        t = typeof(rel.rows[0][index]),
         output = [];
         // if (t == 'string') {
         // we need to get that column
@@ -58,59 +58,59 @@ define(['angular', 'relations', 'ui-bootstrap'], function(angular, relations) {
       //   // not even sure if we're still doing that.
       //   return [];
       // }
-    } // }}}
+    }; // }}}
 
     // insert a statement into the history
-    var hist_insert = function(rel) { // {{{
+    var hist_insert = function (rel) { // {{{
       var index = $scope.history.length;
-      $scope.history.push({relation: rel, remove: function() {
+      $scope.history.push({relation: rel, remove: function () {
         entry = $scope.history[index];
 
         for (var i = $scope.history.length - 1; i >= index; i--) {
           delete $scope.relations[$scope.history[i].relation.name];
           $scope.history.pop();
         }
-        if ($scope.history.length == 0) {
+        if ($scope.history.length === 0) {
           $scope.relation = null;
         } else {
           $scope.relation = $scope.history[$scope.history.length - 1].relation;
         }
       }});
       console.log($scope.history[index].relation.statement);
-    } // }}}
+    }; // }}}
 
     // return an object to handle a 'select' action
-    $scope.Select = function() { // {{{
-      return new function() { // {{{
+    $scope.Select = function () { // {{{
+      return new function () { // {{{
         this.name = 'Select';
         this.page = 'partial/select.html';
         this.relation = {name: '[relation]'};
 
-        this.setDefaults = function() {
+        this.setDefaults = function () {
           this.attribute = '[attribute]';
           this.condition = '[condition]';
           this.value = '[value]';
-        }
+        };
 
-        this.setRelation = function(rel) {
+        this.setRelation = function (rel) {
           this.setDefaults();
           this.relation = rel;
-        }
+        };
 
-        this.setAttribute = function(attr) {
+        this.setAttribute = function (attr) {
           this.setDefaults();
           this.attribute = attr;
-        }
+        };
 
-        this.setCondition = function(comp) {
+        this.setCondition = function (comp) {
           this.condition = comp;
-        }
+        };
 
-        this.setValue = function(val) {
+        this.setValue = function (val) {
           this.value = val;
-        } // }}}
+        }; // }}}
 
-        this.accept = function() { // {{{
+        this.accept = function () { // {{{
           // declare some stuff
           var rows = this.relation.rows,
               r_name = getNextName(),
@@ -127,17 +127,17 @@ define(['angular', 'relations', 'ui-bootstrap'], function(angular, relations) {
           // pull out our comparison operator
           var filter;
           if (this.condition == '<') {
-            filter = function(val1, val2) { return (val1 < val2); }
+            filter = function (val1, val2) { return (val1 < val2); };
           } else if (this.condition == '<=') {
-            filter = function(val1, val2) { return (val1 <= val2); }
+            filter = function (val1, val2) { return (val1 <= val2); };
           } else if (this.condition == '>') {
-            filter = function(val1, val2) { return (val1 > val2); }
+            filter = function (val1, val2) { return (val1 > val2); };
           } else if (this.condition == '>=') {
-            filter = function(val1, val2) { return (val1 >= val2); }
+            filter = function (val1, val2) { return (val1 >= val2); };
           } else if (this.condition == '==') {
-            filter = function(val1, val2) { return (val1 == val2); }
+            filter = function (val1, val2) { return (val1 == val2); };
           } else if (this.condition == '!=') {
-            filter = function(val1, val2) { return (val1 != val2); }
+            filter = function (val1, val2) { return (val1 != val2); };
           }
 
           // and filter it across our relation
@@ -155,32 +155,32 @@ define(['angular', 'relations', 'ui-bootstrap'], function(angular, relations) {
           hist_insert(r_out);
           // and reset the action
           $scope.action = $scope.Default();
-        } // }}}
+        }; // }}}
 
         this.setDefaults();
-      }
-    } // }}}
+      }();
+    }; // }}}
 
     // return an object to handle a 'project' action
-    $scope.Project = function() { // {{{
-      return new function() { // {{{
+    $scope.Project = function () { // {{{
+      return new function () { // {{{
         this.name = 'Project';
         this.page = 'partial/project.html';
         this.relation = {name: '[relation]'};
-        this.dropdown = '[attribute]'
+        this.dropdown = '[attribute]';
 
-        this.setDefaults = function() {
+        this.setDefaults = function () {
           this.attributes = [];
           this.available = [];
-        }
+        };
 
-        this.setRelation = function(rel) {
+        this.setRelation = function (rel) {
           this.setDefaults();
           this.relation = rel;
           this.available = rel.head.slice();      // makes a copy
-        }
+        };
 
-        this.addAttribute = function(attr) {
+        this.addAttribute = function (attr) {
           this.attributes.push(attr);
           var index = this.available.indexOf(attr);
           if (index != -1) {
@@ -188,9 +188,9 @@ define(['angular', 'relations', 'ui-bootstrap'], function(angular, relations) {
           } else {
             $scope.error();
           }
-        }
+        };
 
-        this.removeAttribute = function(attr) {
+        this.removeAttribute = function (attr) {
           var index = this.attributes.indexOf(attr);
           if (index != -1) {
             this.attributes.splice(index, 1);
@@ -198,9 +198,9 @@ define(['angular', 'relations', 'ui-bootstrap'], function(angular, relations) {
             $scope.error();
           }
           this.available.push(attr);
-        } // }}}
+        }; // }}}
 
-        this.accept = function() { // {{{
+        this.accept = function () { // {{{
 
           // declare some stuff
           var head = this.relation.head,
@@ -232,15 +232,15 @@ define(['angular', 'relations', 'ui-bootstrap'], function(angular, relations) {
           $scope.relation = r_out;
           hist_insert(r_out);
           $scope.action = $scope.Default();
-        } // }}}
+        }; // }}}
 
         this.setDefaults();
-      }
-    } // }}}
+      }();
+    }; // }}}
 
     // return an object to handle a 'join' action
-    $scope.Join = function() { // {{{
-      return new function() { // {{{
+    $scope.Join = function () { // {{{
+      return new function () { // {{{
         this.name = 'Join';
         this.page = 'partial/join.html';
         this.relation1 = {name: '[relation]'};
@@ -248,7 +248,7 @@ define(['angular', 'relations', 'ui-bootstrap'], function(angular, relations) {
         this.attribute = '[attribute]';
         this.available = [];
 
-        this.getAvailable = function() {
+        this.getAvailable = function () {
           if (!this.relation1.head || !this.relation2.head) {
             return;
           }
@@ -260,7 +260,7 @@ define(['angular', 'relations', 'ui-bootstrap'], function(angular, relations) {
           list1.sort();
           list2.sort();
 
-          while (list1.length != 0 && list2.length != 0) {
+          while (list1.length !== 0 && list2.length !== 0) {
             if (list1[0] < list2[0]) {
               list1.splice(0, 1);
             } else if (list1[0] > list2[0]) {
@@ -273,31 +273,31 @@ define(['angular', 'relations', 'ui-bootstrap'], function(angular, relations) {
           }
 
           this.available = listOut;
-        }
+        };
 
-        this.getShared = function() {
+        this.getShared = function () {
           return this.available;
-        }
+        };
 
-        this.setRelation1 = function(rel) {
+        this.setRelation1 = function (rel) {
           this.attribute = '[attribute]';
           this.relation1 = rel;
           this.getAvailable();
-        }
+        };
 
-        this.setRelation2 = function(rel) {
+        this.setRelation2 = function (rel) {
           this.attribute = '[attribute]';
           this.relation2 = rel;
           this.getAvailable();
-        }
+        };
 
-        this.setAttribute = function(attr) {
+        this.setAttribute = function (attr) {
           this.attribute = attr;
-        } // }}}
+        }; // }}}
 
         // Fired when Join is active and accept is pressed
         // joins two tables, and puts the result in $scope.relations
-        this.accept = function() { // {{{
+        this.accept = function () { // {{{
           // the attributes from both input tables
           var both = this.relation1.head.concat(this.relation2.head),
               // a name for our resulting relation
@@ -317,7 +317,7 @@ define(['angular', 'relations', 'ui-bootstrap'], function(angular, relations) {
                     this.relation2.name + ' OVER ' + this.attribute + ';',
                 head: [],
                 rows: []
-              }
+              };
 
           // for each attr in 'both', if not in the resultant head, add it
           for (var i = 0; i < both.length; i++) {
@@ -349,7 +349,7 @@ define(['angular', 'relations', 'ui-bootstrap'], function(angular, relations) {
                     row.push(relB.rows[j][k]);
                   }
                 }
-                r_out.rows.push(row)
+                r_out.rows.push(row);
               }
             }
           }
@@ -358,17 +358,17 @@ define(['angular', 'relations', 'ui-bootstrap'], function(angular, relations) {
           $scope.relations[r_out.name] = r_out;
           hist_insert(r_out);
           $scope.action = $scope.Default();
-        } // }}}
-      }
-    } // }}}
+        }; // }}}
+      }();
+    }; // }}}
 
     // return an object to placehold for an action
-    $scope.Default = function() { // {{{
-      return new function() {
+    $scope.Default = function () { // {{{
+      return new function () {
         this.name = 'Action';
         this.page = 'partial/default.html';
-      }
-    } // }}}
+      }();
+    }; // }}}
 
     // set the first action to be 'default'
     $scope.action = $scope.Default();
