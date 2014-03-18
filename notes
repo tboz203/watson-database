@@ -26,3 +26,5 @@ For Mike:
 - i'm betting we can take the 'remove' function out of the hist object array
   and put a single one in the $scope. we'd just need some way to get that index
   into it.
+
+blah blah blah
